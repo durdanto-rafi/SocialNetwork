@@ -13,6 +13,15 @@ namespace SocialNetwork {
     public partial class Profile {
         
         /// <summary>
+        /// txtStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStatus;
+        
+        /// <summary>
         /// btnPost control.
         /// </summary>
         /// <remarks>

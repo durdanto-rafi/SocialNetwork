@@ -234,6 +234,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="Database\Post.cs">
+      <DependentUpon>SocialNetworkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

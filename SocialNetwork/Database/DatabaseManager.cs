@@ -64,5 +64,11 @@ namespace SocialNetwork.Database
             db.LoginDetails.Add(loginDetails);
             db.SaveChanges();
         }
+
+        public void insertPost(Post post)
+        {
+            db.Posts.Add(post);
+            db.SaveChanges();
+        }
     }
 }

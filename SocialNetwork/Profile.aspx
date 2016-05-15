@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="SocialNetwork.Profile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Profile.aspx.cs" Inherits="SocialNetwork.Profile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Timeline container -->
@@ -42,12 +42,13 @@
                             <div class="col-md-12">
                                 <div class="panel profile-info">
                                     <div>
-                                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>
+                                        <%--<textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>--%>
+                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area textbox-resize-none" TextMode="MultiLine"  rows="2" placeholder="Whats in your mind today?"></asp:TextBox>
                                     </div>
                                     <div class="panel-footer">
                                        <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
-                                        <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" />
-
+                                       <%-- <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click"/>--%>
+                                        <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click" />
                                         <ul class="nav nav-pills">
                                             <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                                             <li><a href="#"><i class="fa fa-camera"></i></a></li>
