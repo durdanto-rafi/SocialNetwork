@@ -29,10 +29,29 @@
     <script src="assets/js/jquery.1.11.1.min.js"></script>
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
+     <script src="sweet-alert/sweetalert.min.js"></script>
+    <link href="sweet-alert/sweetalert.css" rel="stylesheet" />
+
     <script type="text/javascript">
         function myClosure() {
             $(".frm").toggleClass("flipInX");
         }
+    </script>
+
+    <script type="text/javascript">
+        function successalert() {
+            swal({
+                title: 'Congratulations!',
+                text: 'Your registration was successful, Login to start you profile',
+                type: 'success'
+            });
+        }
+
+        function errorAlert(message)
+        {
+            sweetAlert("Oops...", message, "error");
+        }
+        
     </script>
 
 </head>
@@ -46,34 +65,17 @@
                     <form role="form" class="frm animated flipInX" runat="server">
                         <div class="form-content">
                             <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <asp:TextBox ID="txtUser" runat="server" class="form-control input-underline input-lg" placeholder="Username"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" class="form-control input-underline input-lg" placeholder="Password"></asp:TextBox>
                             </div>
                         </div>
-                        <%-- <a href="Profile.aspx" class="btn btn-info btn-lg">Log in</a>
-                        <a href="#" class="btn btn-info btn-lg btn-frm">Register</a>--%>
 
                         <asp:Button ID="btnLogin" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLogin_Click" />
                         <asp:Button ID="btnReg" runat="server" class="btn btn-info btn-lg btn-frm" Text="Register" OnClick="btnReg_Click" OnClientClick="myClosure();" />
                     </form>
-                    <form role="form" class="frm hidden">
-                        <div class="form-content">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Email" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Username" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control input-underline input-lg" placeholder="Password" />
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-info btn-lg btn-frm">Log in</a>
-                        <%--<button type="submit" class="btn btn-info btn-lg">Register</button>--%>
-                        <%-- <asp:Button ID="btnRegister" runat="server" class="btn btn-info btn-lg" Text="Register" />--%>
-                    </form>
+                    
                 </div>
             </div>
             <div class="row welcome-full animated fadeInLeft users-row">

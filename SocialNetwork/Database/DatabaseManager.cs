@@ -44,5 +44,19 @@ namespace SocialNetwork.Database
             }
 
         }
+
+        public bool checkLogin(User user)
+        {
+            var data = db.Users.Where(x => x.name == user.name && x.password == user.password).ToList();
+
+            if (data.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
