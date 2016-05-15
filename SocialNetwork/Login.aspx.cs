@@ -18,5 +18,10 @@ namespace SocialNetwork
         {
             Response.Redirect("Profile.aspx");
         }
+
+        protected void btnReg_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
+        }
     }
 }

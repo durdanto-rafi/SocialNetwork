@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SocialNetwork.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="SocialNetwork.Register" %>
 
 <!DOCTYPE html>
 
@@ -44,36 +44,27 @@
                     <img src="img/prism.png" class="user-avatar" />
                     <h1>People-Let</h1>
                     <form role="form" class="frm animated flipInX" runat="server">
-                        <div class="form-content">
+                       <div class="form-content">
                             <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <%--<input type="text" class="form-control input-underline input-lg" placeholder="Email" />--%>
+                                <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" class="form-control input-underline input-lg" placeholder="Email"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <%--<input type="text" class="form-control input-underline input-lg" placeholder="Username" />--%>
+                                 <asp:TextBox ID="txtUser" runat="server" class="form-control input-underline input-lg" placeholder="Username"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <%--<input type="password" class="form-control input-underline input-lg" placeholder="Password" />--%>
+                                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" class="form-control input-underline input-lg" placeholder="Password"></asp:TextBox>
                             </div>
                         </div>
                         <%-- <a href="Profile.aspx" class="btn btn-info btn-lg">Log in</a>
                         <a href="#" class="btn btn-info btn-lg btn-frm">Register</a>--%>
 
-                        <asp:Button ID="btnLogin" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLogin_Click" />
-                        <asp:Button ID="btnReg" runat="server" class="btn btn-info btn-lg btn-frm" Text="Register" OnClick="btnReg_Click" OnClientClick="myClosure();" />
+                        <asp:Button ID="btnLog" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLog_Click"/>
+                        <asp:Button ID="btnReg" runat="server" class="btn btn-info btn-lg btn-frm" Text="Register" OnClick="btnReg_Click" />
                     </form>
-                    <form role="form" class="frm hidden">
-                        <div class="form-content">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Email" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control input-underline input-lg" placeholder="Username" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control input-underline input-lg" placeholder="Password" />
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-info btn-lg btn-frm">Log in</a>
-                        <%--<button type="submit" class="btn btn-info btn-lg">Register</button>--%>
-                        <%-- <asp:Button ID="btnRegister" runat="server" class="btn btn-info btn-lg" Text="Register" />--%>
-                    </form>
+                   
                 </div>
             </div>
             <div class="row welcome-full animated fadeInLeft users-row">
@@ -155,3 +146,4 @@
     </div>
 </body>
 </html>
+
