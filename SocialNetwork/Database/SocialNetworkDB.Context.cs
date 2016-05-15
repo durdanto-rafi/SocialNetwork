@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SocialNetwork
+namespace SocialNetwork.Database
 {
     using System;
     using System.Data.Entity;

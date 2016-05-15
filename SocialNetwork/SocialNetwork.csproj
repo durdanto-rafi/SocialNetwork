@@ -189,12 +189,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Register.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="SocialNetworkDB.Context.tt">
+    <Content Include="Database\SocialNetworkDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
       <LastGenOutput>SocialNetworkDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SocialNetworkDB.tt">
+    <Content Include="Database\SocialNetworkDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
       <LastGenOutput>SocialNetworkDB.cs</LastGenOutput>
@@ -209,11 +209,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
-    <EntityDeploy Include="SocialNetworkDB.edmx">
+    <EntityDeploy Include="Database\SocialNetworkDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SocialNetworkDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SocialNetworkDB.edmx.diagram">
+    <Content Include="Database\SocialNetworkDB.edmx.diagram">
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -262,7 +262,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoginDetail.cs">
+    <Compile Include="Database\LoginDetail.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Messages.aspx.cs">
@@ -308,22 +308,22 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="SocialNetworkDB.Context.cs">
+    <Compile Include="Database\SocialNetworkDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SocialNetworkDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SocialNetworkDB.cs">
+    <Compile Include="Database\SocialNetworkDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="SocialNetworkDB.Designer.cs">
+    <Compile Include="Database\SocialNetworkDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Database\User.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewPhoto.aspx.cs">
