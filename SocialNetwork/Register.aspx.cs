@@ -9,7 +9,6 @@ namespace SocialNetwork
 {
     public partial class Register : System.Web.UI.Page
     {
-        SocialNetworkEntities db = new SocialNetworkEntities();
         Database.DatabaseManager databaseManager = new Database.DatabaseManager();
         protected void Page_Load(object sender, EventArgs e)
         {
