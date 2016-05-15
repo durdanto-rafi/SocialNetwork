@@ -46,6 +46,7 @@
                                     </div>
                                     <div class="panel-footer">
                                        <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
+                                        <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" />
 
                                         <ul class="nav nav-pills">
                                             <li><a href="#"><i class="fa fa-map-marker"></i></a></li>

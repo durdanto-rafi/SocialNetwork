@@ -126,6 +126,7 @@
                                 <li><a href="error404.html">Error 404</a></li>
                                 <li><a href="error500.html">Error 500</a></li>
                                 <li><a href="recover_password.html">Recover password</a></li>
+                                <li><a href="Login.aspx">Logout</a></li>
                             </ul>
                         </li>
                         <li><a href="#" class="nav-controller"><i class="fa fa-user"></i></a></li>
