@@ -26,5 +26,6 @@ namespace SocialNetwork
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<LoginDetail> LoginDetails { get; set; }
     }
 }

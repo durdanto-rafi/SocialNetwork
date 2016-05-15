@@ -18,13 +18,45 @@ namespace SocialNetwork
 
         protected void btnReg_Click(object sender, EventArgs e)
         {
-            int count = db.Users.ToList().Count();
-
             User user = new User();
-            user.name = txtUser.Text;
-            user.password = txtPassword.Text;
+            user.email = txtEmail.Text.Trim();
+            user.name = txtUser.Text.Trim();
+            user.password = txtPassword.Text.Trim();
 
-            databaseManager.insertRegistration(user);
+            if (user.email.Length < 1)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Email can not be empty');", true);
+            }
+            else if (user.name.Length < 1)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Username can not be empty');", true);
+            }
+
+            else if (databaseManager.checkEmail(user))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Email duplicated');", true);
+            }
+            else if (databaseManager.checkUserName(user))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Username is already taken');", true);
+            }
+            else if (user.password.Length < 1)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Password can not be empty');", true);
+            }
+            else if (txtPassword.Text.Trim() != txtConfirmPass.Text.Trim())
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Password mismatched');", true);
+            }
+            else
+            {
+                databaseManager.insertRegistration(user);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "successalert();", true);
+
+                txtUser.Text = String.Empty;
+                txtEmail.Text = String.Empty;
+                
+            }
         }
 
         protected void btnLog_Click(object sender, EventArgs e)

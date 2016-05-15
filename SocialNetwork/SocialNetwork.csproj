@@ -199,6 +199,9 @@
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
       <LastGenOutput>SocialNetworkDB.cs</LastGenOutput>
     </Content>
+    <Content Include="sweet-alert\sweetalert-dev.js" />
+    <Content Include="sweet-alert\sweetalert.css" />
+    <Content Include="sweet-alert\sweetalert.min.js" />
     <Content Include="ViewPhoto.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -258,6 +261,9 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginDetail.cs">
+      <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Messages.aspx.cs">
       <DependentUpon>Messages.aspx</DependentUpon>

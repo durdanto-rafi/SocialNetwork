@@ -14,5 +14,35 @@ namespace SocialNetwork.Database
             db.Users.Add(user);
             db.SaveChanges();
         }
+
+        public bool checkEmail(User user)
+        {
+            var data = db.Users.Where(x => x.email == user.email).ToList();
+
+            if (data.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public bool checkUserName(User user)
+        {
+            var data = db.Users.Where(x => x.name == user.name).ToList();
+
+            if (data.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

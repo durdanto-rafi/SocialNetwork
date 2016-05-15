@@ -18,7 +18,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
 
-
+    <script src="sweet-alert/sweetalert.min.js"></script>
+    <link href="sweet-alert/sweetalert.css" rel="stylesheet" />
     <link href="bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/animate.min.css" rel="stylesheet" />
     <link href="assets/css/timeline.css" rel="stylesheet" />
@@ -34,6 +35,22 @@
             $(".frm").toggleClass("flipInX");
         }
     </script>
+    <script type="text/javascript">
+        function successalert() {
+            swal({
+                title: 'Congratulations!',
+                text: 'Your registration was successful, Login to start you profile',
+                type: 'success'
+            });
+        }
+
+        function errorAlert(message)
+        {
+            sweetAlert("Oops...", message, "error");
+        }
+        
+    </script>
+
 
 </head>
 <body class="animated fadeIn">
@@ -44,27 +61,25 @@
                     <img src="img/prism.png" class="user-avatar" />
                     <h1>People-Let</h1>
                     <form role="form" class="frm animated flipInX" runat="server">
-                       <div class="form-content">
+                        <div class="form-content">
                             <div class="form-group">
-                                <%--<input type="text" class="form-control input-underline input-lg" placeholder="Email" />--%>
                                 <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" class="form-control input-underline input-lg" placeholder="Email"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <%--<input type="text" class="form-control input-underline input-lg" placeholder="Username" />--%>
-                                 <asp:TextBox ID="txtUser" runat="server" class="form-control input-underline input-lg" placeholder="Username"></asp:TextBox>
+                                <asp:TextBox ID="txtUser" runat="server" class="form-control input-underline input-lg" placeholder="Username"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <%--<input type="password" class="form-control input-underline input-lg" placeholder="Password" />--%>
                                 <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" class="form-control input-underline input-lg" placeholder="Password"></asp:TextBox>
                             </div>
+                             <div class="form-group">
+                                <asp:TextBox ID="txtConfirmPass" TextMode="Password" runat="server" class="form-control input-underline input-lg" placeholder="Confirm Password"></asp:TextBox>
+                            </div>
                         </div>
-                        <%-- <a href="Profile.aspx" class="btn btn-info btn-lg">Log in</a>
-                        <a href="#" class="btn btn-info btn-lg btn-frm">Register</a>--%>
 
-                        <asp:Button ID="btnLog" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLog_Click"/>
+                        <asp:Button ID="btnLog" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLog_Click" />
                         <asp:Button ID="btnReg" runat="server" class="btn btn-info btn-lg btn-frm" Text="Register" OnClick="btnReg_Click" />
                     </form>
-                   
+
                 </div>
             </div>
             <div class="row welcome-full animated fadeInLeft users-row">

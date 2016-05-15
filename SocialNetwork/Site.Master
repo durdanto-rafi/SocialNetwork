@@ -32,20 +32,34 @@
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.nicescroll.min.js"></script>
 
+    <link href="sweet-alert/sweetalert.css" rel="stylesheet" />
+    <script src="sweet-alert/sweetalert.min.js"></script>
+
     <!--BEGIN SELECTED MENU ITEM -->
-    <%-- <script type="text/javascript">
-        $(document).ready(function () {
-            var url = window.location.pathname;
-            var substr = url.split('/');
-            var urlaspx = substr[substr.length-1];
-            $('.nav').find('.active').removeClass('active');
-            $('.nav li a').each(function () {
-                if (this.href.indexOf(urlaspx) >= 0) {
-                    $(this).parent().addClass('active');
-                }
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    var url = window.location.pathname;
+        //    var substr = url.split('/');
+        //    var urlaspx = substr[substr.length-1];
+        //    $('.nav').find('.active').removeClass('active');
+        //    $('.nav li a').each(function () {
+        //        if (this.href.indexOf(urlaspx) >= 0) {
+        //            $(this).parent().addClass('active');
+        //        }
+        //    });
+        //});
+    </script>
+
+
+    <script type="text/javascript">
+        function successalert() {
+            swal({
+                title: 'Congratulations!',
+                text: 'Your message has been succesfully sent',
+                type: 'success'
             });
-        });
-    </script>--%>
+        }
+    </script>
     <!--END SELECTED MENU ITEM -->
 
 </head>
