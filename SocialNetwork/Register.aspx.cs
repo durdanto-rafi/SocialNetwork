@@ -22,6 +22,7 @@ namespace SocialNetwork
             user.email = txtEmail.Text.Trim();
             user.name = txtUser.Text.Trim();
             user.password = txtPassword.Text.Trim();
+            user.joinDate = DateTime.Now;
 
             if (user.email.Length < 1)
             {

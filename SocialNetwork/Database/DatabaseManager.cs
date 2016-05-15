@@ -58,5 +58,11 @@ namespace SocialNetwork.Database
                 return true;
             }
         }
+
+        public void insertLoginDetails(LoginDetail loginDetails)
+        {
+            db.LoginDetails.Add(loginDetails);
+            db.SaveChanges();
+        }
     }
 }

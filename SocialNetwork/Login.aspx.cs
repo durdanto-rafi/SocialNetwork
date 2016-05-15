@@ -36,6 +36,10 @@ namespace SocialNetwork
             }
             else
             {
+                LoginDetail loginDetails = new LoginDetail();
+                loginDetails.loginTime = DateTime.Now;
+                loginDetails.userId = 1;
+                databaseManager.insertLoginDetails(loginDetails);
                 Response.Redirect("Profile.aspx");
             }
         }

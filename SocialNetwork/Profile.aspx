@@ -41,11 +41,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="panel profile-info">
-                                    <form>
+                                    <div>
                                         <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>
-                                    </form>
+                                    </div>
                                     <div class="panel-footer">
-                                        <button type="button" class="btn btn-info pull-right">Post</button>
+                                       <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
+
                                         <ul class="nav nav-pills">
                                             <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                                             <li><a href="#"><i class="fa fa-camera"></i></a></li>
