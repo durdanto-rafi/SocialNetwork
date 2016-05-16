@@ -11,15 +11,24 @@ namespace SocialNetwork
     public partial class Profile : System.Web.UI.Page
     {
         DatabaseManager databaseManager = new DatabaseManager();
+        User currentUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+               
+            }
         }
 
         protected void btnPost_Click(object sender, EventArgs e)
         {
+            if (Session["UserInfo"] != null)
+            {
+                currentUser = (User)Session["UserInfo"];
+            }
+
             Post post = new Post();
-            post.userId = 1;
+            post.userId = currentUser.id;
             post.status = txtStatus.Text.Trim();
             post.statusTime = DateTime.Now;
             post.statusPlace = "Dhaka";

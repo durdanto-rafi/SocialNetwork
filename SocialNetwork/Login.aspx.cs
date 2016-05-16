@@ -13,7 +13,11 @@ namespace SocialNetwork
         DatabaseManager databaseManager = new DatabaseManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Session.Abandon();
+                Session.Clear();
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -36,11 +40,22 @@ namespace SocialNetwork
             }
             else
             {
-                LoginDetail loginDetails = new LoginDetail();
-                loginDetails.loginTime = DateTime.Now;
-                loginDetails.userId = 1;
-                databaseManager.insertLoginDetails(loginDetails);
-                Response.Redirect("Profile.aspx");
+                user = databaseManager.getUserInfoByUsername(user.name);
+                if(user != null)
+                {
+                    Session["UserInfo"] = user;
+                    LoginDetail loginDetails = new LoginDetail();
+                    loginDetails.loginTime = DateTime.Now;
+                    loginDetails.userId = user.id;
+                    databaseManager.insertLoginDetails(loginDetails);
+
+                    Response.Redirect("Profile.aspx");
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Sorry something went wrong, please try again...');", true);
+                }
+                
             }
         }
 

@@ -70,5 +70,19 @@ namespace SocialNetwork.Database
             db.Posts.Add(post);
             db.SaveChanges();
         }
+
+        public User getUserInfoByUsername(string username)
+        {
+            List<User> users = db.Users.Where(x => x.name == username).ToList();
+
+            if (users.Count < 1)
+            {
+                return null;
+            }
+            else
+            {
+                return users[0];
+            }
+        }
     }
 }
