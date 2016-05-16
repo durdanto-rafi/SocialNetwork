@@ -16,7 +16,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/1.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 1 - END -->
@@ -24,7 +24,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/2.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 2 - END -->
@@ -32,7 +32,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/3.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 3 - END -->
@@ -40,7 +40,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/4.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 4 - END -->
@@ -48,7 +48,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/5.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 5 - END -->
@@ -56,7 +56,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/6.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 6 - END -->
@@ -64,7 +64,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/7.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 7 - END -->
@@ -72,7 +72,7 @@
                         <div class="overlay-wrapper col-xs-6 col-sm-3">
                             <img src="img/Photos/8.jpg" class="img-responsive" alt="">
                             <span class="overlay">
-                                <a href="view_photo.html" class="show-image"><i class="fa fa-share"></i></a>
+                                <a href="ViewPhoto.aspx" class="show-image"><i class="fa fa-share"></i></a>
                             </span>
                         </div>
                         <!-- GALLERY ITEM 8 - END -->

@@ -43,7 +43,7 @@
                                 <div class="panel profile-info">
                                     <div>
                                         <%--<textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>--%>
-                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area textbox-resize-none" TextMode="MultiLine"  rows="2" placeholder="Whats in your mind today?"></asp:TextBox>
+                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine"  placeholder="Whats in your mind today?"></asp:TextBox>
                                     </div>
                                     <div class="panel-footer">
                                        <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>

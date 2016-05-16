@@ -20,10 +20,10 @@
                             </div>
 
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                                <li><a href="about.html"><i class="fa fa-info-circle"></i>About</a></li>
-                                <li><a href="friends.html"><i class="fa fa-users"></i>Friends</a></li>
-                                <li><a href="photos.html"><i class="fa fa-file-image-o"></i>Photos</a></li>
+                                <li><a href="Profile.aspx"><i class="fa fa-user"></i>Profile</a></li>
+                                <li><a href="About.aspx"><i class="fa fa-info-circle"></i>About</a></li>
+                                <li><a href="Friends.aspx"><i class="fa fa-users"></i>Friends</a></li>
+                                <li><a href="Photos.aspx"><i class="fa fa-file-image-o"></i>Photos</a></li>
                                 <li class="active"><a href="edit-profile.html"><i class="fa fa-edit"></i>Edit profile</a></li>
                             </ul>
                         </div>

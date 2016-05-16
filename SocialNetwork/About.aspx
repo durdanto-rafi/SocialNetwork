@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="SocialNetwork.About" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="row text-center color-container">
+        <h1 class="profile-name">Katya Angintiew</h1>
+    </div>
     <!-- Timeline content -->
     <div class="row">
         <div class="container" style="margin-top: 50px;">
@@ -17,11 +20,11 @@
                             </div>
 
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                                <li class="active"><a href="about.html"><i class="fa fa-info-circle"></i>About</a></li>
-                                <li><a href="friends.html"><i class="fa fa-users"></i>Friends</a></li>
-                                <li><a href="photos.html"><i class="fa fa-file-image-o"></i>Photos</a></li>
-                                <li><a href="edit-profile.html"><i class="fa fa-edit"></i>Edit profile</a></li>
+                                <li><a href="Profile.aspx"><i class="fa fa-user"></i>Profile</a></li>
+                                <li class="active"><a href="About.aspx"><i class="fa fa-info-circle"></i>About</a></li>
+                                <li><a href="Friends.aspx"><i class="fa fa-users"></i>Friends</a></li>
+                                <li><a href="Photos.aspx"><i class="fa fa-file-image-o"></i>Photos</a></li>
+                                <li><a href="EditProfile.aspx"><i class="fa fa-edit"></i>Edit profile</a></li>
                             </ul>
                         </div>
                     </div>

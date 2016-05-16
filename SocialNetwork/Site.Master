@@ -18,6 +18,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
 
+
+    <link href="assets/css/friends.css" rel="stylesheet" />
     <link href="assets/css/messages.css" rel="stylesheet" />
     <link href="assets/css/view_photo.css" rel="stylesheet" />
     <link href="bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -109,23 +111,23 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="Photos.aspx">Photos</a></li>
-                                <li><a href="ViewPhoto.aspx">View photo</a></li>
+                               <%-- <li><a href="ViewPhoto.aspx">View photo</a></li>--%>
                                 <li><a href="Friends.aspx">Friends</a></li>
-                                <li><a href="user_detail.html">User detail</a></li>
+                                <%--<li><a href="user_detail.html">User detail</a></li>
                                 <li><a href="list_users.html">List users</a></li>
-                                <li><a href="file_manager.html">File manager</a></li>
-                                <li><a href="profile_settings.html">Profile settings</a></li>
-                                <li><a href="people_directory.html">User directory</a></li>
-                                <li><a href="About.html">About</a></li>
+                                <li><a href="file_manager.html">File manager</a></li>--%>
+                                <li><a href="ProfileSettings.aspx">Profile settings</a></li>
+                               <%-- <li><a href="people_directory.html">User directory</a></li>--%>
+                                <li><a href="About.aspx">About</a></li>
                                 <li><a href="EditProfile.aspx">Edit profile</a></li>
-                                <li><a href="notifications.html">Notifications</a></li>
+                               <%-- <li><a href="notifications.html">Notifications</a></li>
                                 <li><a href="blank-cover.html">Blank cover</a></li>
                                 <li><a href="list_posts.html">List posts</a></li>
                                 <li><a href="registration_email.html">Registration email</a></li>
                                 <li><a href="grid_posts.html">Grid posts</a></li>
                                 <li><a href="error404.html">Error 404</a></li>
                                 <li><a href="error500.html">Error 500</a></li>
-                                <li><a href="recover_password.html">Recover password</a></li>
+                                <li><a href="recover_password.html">Recover password</a></li>--%>
                                 <li><a href="Login.aspx">Logout</a></li>
                             </ul>
                         </li>

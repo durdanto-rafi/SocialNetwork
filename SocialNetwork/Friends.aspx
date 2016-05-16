@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Friends.aspx.cs" Inherits="SocialNetwork.Friends" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="row text-center color-container">
+
+        <h1 class="profile-name">Katya Angintiew</h1>
+
+    </div>
     <!-- Timeline content -->
     <div class="container" style="margin-top: 50px;">
         <div class="row">

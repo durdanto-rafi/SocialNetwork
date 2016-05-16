@@ -147,6 +147,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\friends.css" />
     <Content Include="assets\css\messages.css" />
     <Content Include="assets\css\photos.css" />
     <Content Include="assets\css\timeline.css" />
@@ -187,6 +188,7 @@
     <Content Include="Photos.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="ProfileSettings.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Site.Master" />
     <Content Include="Database\SocialNetworkDB.Context.tt">
@@ -288,6 +290,13 @@
     </Compile>
     <Compile Include="Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileSettings.aspx.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileSettings.aspx.designer.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
