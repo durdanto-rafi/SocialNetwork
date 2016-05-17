@@ -356,8 +356,19 @@
                             </h4>
                         </div>
                         <div class="modal-body">
-
+                            <div class="row">
+                                <div class="animated fadeInUp ">
+                                    <div class="col-sm-1">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <img src="img/Photos/4.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="col-sm-1">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="modal-footer">
                             <div class="col-lg-offset-1 col-lg-7 ">
                             </div>
@@ -368,7 +379,6 @@
                                 <asp:TextBox runat="server" class="form-control" placeholder="" ID="txtID" Visible="false" />
                             </div>
                         </div>
-                    </div>
                 </ContentTemplate>
                 <Triggers>
                     <%--<asp:AsyncPostBackTrigger EventName="Click" ControlID="btnAddRow" />--%>
