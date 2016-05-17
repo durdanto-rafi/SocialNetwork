@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.16.1.0.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -164,12 +168,16 @@
     </Content>
     <Content Include="Friends.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="img\Bg\bg2.jpg" />
     <Content Include="img\Cover\nature.jpg" />
     <Content Include="img\favicon.png" />
     <Content Include="img\Friends\child-1.jpg" />
     <Content Include="img\Friends\guy-2.jpg" />
     <Content Include="img\Friends\guy-3.jpg" />
     <Content Include="img\Friends\guy-4.jpg" />
+    <Content Include="img\Friends\guy-5.jpg" />
+    <Content Include="img\Friends\guy-8.jpg" />
+    <Content Include="img\Friends\People-Let.html" />
     <Content Include="img\Friends\woman-1.jpg" />
     <Content Include="img\Friends\woman-10.jpg" />
     <Content Include="img\Friends\woman-2.jpg" />
@@ -177,12 +185,19 @@
     <Content Include="img\Friends\woman-4.jpg" />
     <Content Include="img\Friends\woman-5.jpg" />
     <Content Include="img\Friends\woman-6.jpg" />
+    <Content Include="img\Friends\woman-7.jpg" />
     <Content Include="img\Friends\woman-8.jpg" />
     <Content Include="img\Friends\woman-9.jpg" />
+    <Content Include="img\Photos\1.jpg" />
+    <Content Include="img\Photos\2.jpg" />
     <Content Include="img\Photos\3.jpg" />
+    <Content Include="img\Photos\4.jpg" />
     <Content Include="img\Photos\5.jpg" />
     <Content Include="img\Photos\6.jpg" />
+    <Content Include="img\Photos\7.jpg" />
+    <Content Include="img\Photos\8.jpg" />
     <Content Include="img\Photos\9.jpg" />
+    <Content Include="img\prism.png" />
     <Content Include="Login.aspx" />
     <Content Include="Messages.aspx" />
     <Content Include="Photos.aspx" />
@@ -218,6 +233,7 @@
     <Content Include="Database\SocialNetworkDB.edmx.diagram">
       <DependentUpon>SocialNetworkDB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Craze.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

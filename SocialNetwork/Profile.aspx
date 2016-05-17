@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Profile.aspx.cs" Inherits="SocialNetwork.Profile" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
@@ -43,15 +44,17 @@
                                 <div class="panel profile-info">
                                     <div>
                                         <%--<textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>--%>
-                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine"  placeholder="Whats in your mind today?"></asp:TextBox>
+                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
                                     </div>
                                     <div class="panel-footer">
-                                       <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
-                                       <%-- <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click"/>--%>
+                                        <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
+                                        <%-- <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click"/>--%>
                                         <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click" />
                                         <ul class="nav nav-pills">
-                                            <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-camera"></i></a></li>
+                                            <li>
+                                                <asp:LinkButton ID="lnkOpenMap" runat="server" OnClick="lnkOpenMap_Click"><i class="fa fa-map-marker" ></i></asp:LinkButton></li>
+                                            <li>
+                                                <asp:LinkButton ID="lnkPhotoUpload" runat="server" OnClick="lnkPhotoUpload_Click"><i class="fa fa-camera"></i></asp:LinkButton></li>
                                             <li><a href="#"><i class="fa fa-film"></i></a></li>
                                             <li><a href="#"><i class="fa fa-microphone"></i></a></li>
                                         </ul>
@@ -339,5 +342,40 @@
         </div>
     </div>
     <!-- end timeline content-->
+
+    <!--BEGIN MODAL-->
+    <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">
+                                <asp:Label ID="lblModalTitle" runat="server" Text="Select Photo"></asp:Label>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-lg-offset-1 col-lg-7 ">
+                            </div>
+                            <div class="col-lg-4">
+                                <asp:Button Text="Save" class="btn btn-success" ID="btnPopUpSave" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" />
+                                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <asp:Label runat="server" ID="lblID" CssClass="hidden"></asp:Label>
+                                <asp:TextBox runat="server" class="form-control" placeholder="" ID="txtID" Visible="false" />
+                            </div>
+                        </div>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <%--<asp:AsyncPostBackTrigger EventName="Click" ControlID="btnAddRow" />--%>
+                </Triggers>
+            </asp:UpdatePanel>
+        </div>
+    </div>
+    <!--END MODAL-->
 </asp:Content>
 

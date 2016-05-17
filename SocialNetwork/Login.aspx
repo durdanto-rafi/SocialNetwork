@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <img src="img/prism.png" class="user-avatar" />
-                    <h1>People-Let</h1>
+                    <h1>Welcome to Coder !</h1>
                     <form role="form" class="frm animated flipInX" runat="server">
                         <div class="form-content">
                             <div class="form-group">

@@ -35,5 +35,15 @@ namespace SocialNetwork
 
             databaseManager.insertPost(post);
         }
+
+        protected void lnkOpenMap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkPhotoUpload_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+        }
     }
 }
