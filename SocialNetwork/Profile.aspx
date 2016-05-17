@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Profile.aspx.cs" Inherits="SocialNetwork.Profile" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
+
+<%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    
+
+
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
         <div class="row row-broken">
@@ -40,15 +46,15 @@
                     <!-- left -->
                     <div class="col-md-6">
                         <div class="row">
+
+
+
                             <div class="col-md-12">
                                 <div class="panel profile-info">
                                     <div>
-                                        <%--<textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>--%>
                                         <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
                                     </div>
                                     <div class="panel-footer">
-                                        <%-- <button type="button" class="btn btn-info pull-right">Post</button>--%>
-                                        <%-- <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click"/>--%>
                                         <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click" />
                                         <ul class="nav nav-pills">
                                             <li>
@@ -60,15 +66,21 @@
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
                             <!-- post -->
+                            <!-- end post-->
+
+                            <!-- post -->
+                            <% foreach (Timeline timeline in timelines)
+                                {%>
                             <div class="col-md-12">
                                 <div class="box box-widget">
                                     <div class="box-header with-border">
                                         <div class="user-block">
                                             <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                            <span class="username"><a href="#">Katya Angintiew</a></span>
-                                            <span class="description">Shared publicly - 7:30 PM Today</span>
+                                            <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
+                                            <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %></span>
                                         </div>
                                         <div class="box-tools">
                                             <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
@@ -80,29 +92,10 @@
                                     </div>
                                     <div class="box-body">
                                         <p>
-                                            Far far away, behind the word mountains, far from the
-                                            countries Vokalia and Consonantia, there live the blind
-                                            texts. Separated they live in Bookmarksgrove right at
+                                            <%= timeline.status.ToString() %>
                                         </p>
 
-                                        <p>
-                                            the coast of the Semantics, a large language ocean.
-                                            A small river named Duden flows by their place and supplies
-                                            it with the necessary regelialia. It is a paradisematic
-                                            country, in which roasted parts of sentences fly into
-                                            your mouth.
-                                        </p>
 
-                                        <div class="attachment-block clearfix">
-                                            <img class="attachment-img" src="img/Photos/3.jpg" alt="Attachment Image">
-                                            <div class="attachment-pushed">
-                                                <h4 class="attachment-heading"><a href="#">Lorem ipsum text generator</a></h4>
-                                                <div class="attachment-text">
-                                                    Description about the attachment can be placed here.
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                         <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
                                         <span class="pull-right text-muted">45 likes - 2 comments</span>
@@ -131,85 +124,18 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <form action="#" method="post">
+                                        <div>
                                             <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
                                             <div class="img-push">
                                                 <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <%} %>
                             <!-- end post-->
-                            <!-- post -->
-                            <div class="col-md-12">
-                                <div class="box box-widget">
-                                    <div class="box-header with-border">
-                                        <div class="user-block">
-                                            <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                            <span class="username"><a href="#">Katya Angintiew</a></span>
-                                            <span class="description">Shared publicly - 7:30 PM Today</span>
-                                        </div>
-                                        <div class="box-tools">
-                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
-                                                <i class="fa fa-circle-o"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <p>
-                                            Far far away, behind the word mountains, far from the
-                                            countries Vokalia and Consonantia, there live the blind
-                                            texts. Separated they live in Bookmarksgrove right at
-                                        </p>
 
-                                        <p>
-                                            the coast of the Semantics, a large language ocean.
-                                            A small river named Duden flows by their place and supplies
-                                            it with the necessary regelialia. It is a paradisematic
-                                            country, in which roasted parts of sentences fly into
-                                            your mouth.
-                                        </p>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                        <span class="pull-right text-muted">45 likes - 2 comments</span>
-                                    </div>
-                                    <div class="box-footer box-comments">
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Maria Gonzales
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
-                                            </div>
-                                        </div>
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Nora Havisham
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                The point of using Lorem Ipsum is that it has a more-or-less
-                                                normal distribution of letters, as opposed to using
-                                                'Content here, content here', making it look like readable English.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="box-footer">
-                                        <form action="#" method="post">
-                                            <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
-                                            <div class="img-push">
-                                                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end post-->
                         </div>
                     </div>
                     <!-- end left -->
@@ -361,7 +287,8 @@
                                     <div class="col-sm-1">
                                     </div>
                                     <div class="col-sm-10">
-                                        <img src="img/Photos/4.jpg" class="img-responsive" alt="">
+                                        <%--<img src="img/Photos/4.jpg" class="img-responsive" alt="">--%>
+                                        <asp:Image ID="imgModal" runat="server" src="img/Photos/4.jpg" class="img-responsive" alt="" />
                                     </div>
                                     <div class="col-sm-1">
                                     </div>
@@ -370,13 +297,11 @@
                         </div>
 
                         <div class="modal-footer">
-                            <div class="col-lg-offset-1 col-lg-7 ">
-                            </div>
-                            <div class="col-lg-4">
-                                <asp:Button Text="Save" class="btn btn-success" ID="btnPopUpSave" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" />
+                            <div class="col-lg-12">
+                                <asp:FileUpload Text="Browse" class="btn btn-default btn-file" ID="btnBrowse" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" OnClick="btnBrowse_Click" />
+                                <asp:Button Text="Upload" class="btn btn-success" ID="btnUpload" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" OnClick="btnUpload_Click" />
                                 <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
-                                <asp:Label runat="server" ID="lblID" CssClass="hidden"></asp:Label>
-                                <asp:TextBox runat="server" class="form-control" placeholder="" ID="txtID" Visible="false" />
+
                             </div>
                         </div>
                 </ContentTemplate>

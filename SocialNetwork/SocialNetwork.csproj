@@ -152,12 +152,14 @@
     <Content Include="About.aspx" />
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\friends.css" />
+    <Content Include="assets\css\jquery.Jcrop.css" />
     <Content Include="assets\css\messages.css" />
     <Content Include="assets\css\photos.css" />
     <Content Include="assets\css\timeline.css" />
     <Content Include="assets\css\view_photo.css" />
     <Content Include="assets\js\custom.js" />
     <Content Include="assets\js\jquery.1.11.1.min.js" />
+    <Content Include="assets\js\jquery.Jcrop.js" />
     <Content Include="assets\js\jquery.nicescroll.min.js" />
     <Content Include="bootstrap-3.3.5\css\bootstrap.min.css" />
     <Content Include="bootstrap-3.3.5\js\bootstrap.min.js" />
@@ -255,6 +257,7 @@
     <Compile Include="Database\Post.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\Timeline.cs" />
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

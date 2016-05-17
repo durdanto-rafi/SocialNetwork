@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
 
-
+    <link href="assets/css/jquery.Jcrop.css" rel="stylesheet" />
     <link href="assets/css/friends.css" rel="stylesheet" />
     <link href="assets/css/messages.css" rel="stylesheet" />
     <link href="assets/css/view_photo.css" rel="stylesheet" />
@@ -29,6 +29,8 @@
     <%--<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
+
+    <script src="assets/js/jquery.Jcrop.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/jquery.1.11.1.min.js"></script>
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -62,12 +64,14 @@
             });
         }
     </script>
+
     <!--END SELECTED MENU ITEM -->
 
 </head>
 <body class="animated fadeIn">
     <form runat="server">
         <asp:ScriptManager ID="MasterScriptManager" runat="server" EnablePartialRendering="true">
+
         </asp:ScriptManager>
 
         <!--BEGIN Fixed navbar -->
@@ -99,7 +103,7 @@
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active">
-                            <a href="Profile.aspx">Katya
+                            <a href="Profile.aspx"><%=currentUser.name %>
                             <img src="img/Friends/woman-4.jpg" class="img-nav">
                             </a>
                         </li>

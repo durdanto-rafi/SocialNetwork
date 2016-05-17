@@ -67,30 +67,30 @@ namespace SocialNetwork {
         protected global::System.Web.UI.WebControls.Label lblModalTitle;
         
         /// <summary>
-        /// btnPopUpSave control.
+        /// imgModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPopUpSave;
+        protected global::System.Web.UI.WebControls.Image imgModal;
         
         /// <summary>
-        /// lblID control.
+        /// btnBrowse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblID;
+        protected global::System.Web.UI.WebControls.FileUpload btnBrowse;
         
         /// <summary>
-        /// txtID control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtID;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }
