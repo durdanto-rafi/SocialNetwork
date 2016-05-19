@@ -5,7 +5,7 @@
 <%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    
+
 
 
     <!-- Timeline container -->
@@ -46,94 +46,103 @@
                     <!-- left -->
                     <div class="col-md-6">
                         <div class="row">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12">
+                                        <div class="panel profile-info">
+                                            <div>
+                                                <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" ClientIDMode="AutoID" OnClick="btnPost_Click" />
 
-
-
-                            <div class="col-md-12">
-                                <div class="panel profile-info">
-                                    <div>
-                                        <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
+                                                <ul class="nav nav-pills">
+                                                    <li>
+                                                        <asp:LinkButton ID="lnkOpenMap" runat="server" OnClick="lnkOpenMap_Click"><i class="fa fa-map-marker" ></i></asp:LinkButton></li>
+                                                    <li>
+                                                        <asp:LinkButton ID="lnkPhotoUpload" runat="server" OnClick="lnkPhotoUpload_Click"><i class="fa fa-camera"></i></asp:LinkButton></li>
+                                                    <li><a href="#"><i class="fa fa-film"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-microphone"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="panel-footer">
-                                        <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click" />
-                                        <ul class="nav nav-pills">
-                                            <li>
-                                                <asp:LinkButton ID="lnkOpenMap" runat="server" OnClick="lnkOpenMap_Click"><i class="fa fa-map-marker" ></i></asp:LinkButton></li>
-                                            <li>
-                                                <asp:LinkButton ID="lnkPhotoUpload" runat="server" OnClick="lnkPhotoUpload_Click"><i class="fa fa-camera"></i></asp:LinkButton></li>
-                                            <li><a href="#"><i class="fa fa-film"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-microphone"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
 
-                            </div>
                             <!-- post -->
                             <!-- end post-->
 
                             <!-- post -->
-                            <% foreach (Timeline timeline in timelines)
-                                {%>
-                            <div class="col-md-12">
-                                <div class="box box-widget">
-                                    <div class="box-header with-border">
-                                        <div class="user-block">
-                                            <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                            <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
-                                            <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %></span>
-                                        </div>
-                                        <div class="box-tools">
-                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
-                                                <i class="fa fa-circle-o"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <p>
-                                            <%= timeline.status.ToString() %>
-                                        </p>
-
-
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                        <span class="pull-right text-muted">45 likes - 2 comments</span>
-                                    </div>
-                                    <div class="box-footer box-comments">
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Maria Gonzales
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                                <ContentTemplate>
+                                    <% foreach (Timeline timeline in timelines)
+                                        {%>
+                                    <div class="col-md-12">
+                                        <div class="box box-widget">
+                                            <div class="box-header with-border">
+                                                <div class="user-block">
+                                                    <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
+                                                    <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
+                                                    <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %></span>
+                                                </div>
+                                                <div class="box-tools">
+                                                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
+                                                        <i class="fa fa-circle-o"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Nora Havisham
+                                            <div class="box-body">
+                                                <p>
+                                                    <%= timeline.status.ToString() %>
+                                                </p>
+
+
+                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
+                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                            </div>
+                                            <div class="box-footer box-comments">
+                                                <div class="box-comment">
+                                                    <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
+                                                    <div class="comment-text">
+                                                        <span class="username">Maria Gonzales
                                                     <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                The point of using Lorem Ipsum is that it has a more-or-less
+                                                        </span>
+                                                        It is a long established fact that a reader will be distracted
+                                                by the readable content of a page when looking at its layout.
+                                                    </div>
+                                                </div>
+                                                <div class="box-comment">
+                                                    <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
+                                                    <div class="comment-text">
+                                                        <span class="username">Nora Havisham
+                                                    <span class="text-muted pull-right">8:03 PM Today</span>
+                                                        </span>
+                                                        The point of using Lorem Ipsum is that it has a more-or-less
                                                 normal distribution of letters, as opposed to using
                                                 'Content here, content here', making it look like readable English.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-footer">
+                                                <div>
+                                                    <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                    <div class="img-push">
+                                                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="box-footer">
-                                        <div>
-                                            <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
-                                            <div class="img-push">
-                                                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%} %>
+                                    <%} %>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger EventName="Click" ControlID="btnPost" />
+                                </Triggers>
+                            </asp:UpdatePanel>
                             <!-- end post-->
 
                         </div>

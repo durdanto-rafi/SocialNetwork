@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SocialNetwork.SiteMaster"  %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SocialNetwork.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -18,7 +18,6 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
 
-    <link href="assets/css/jquery.Jcrop.css" rel="stylesheet" />
     <link href="assets/css/friends.css" rel="stylesheet" />
     <link href="assets/css/messages.css" rel="stylesheet" />
     <link href="assets/css/view_photo.css" rel="stylesheet" />
@@ -30,7 +29,6 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
-    <script src="assets/js/jquery.Jcrop.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/jquery.1.11.1.min.js"></script>
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -69,62 +67,62 @@
 
 </head>
 <body class="animated fadeIn">
-    <form runat="server">
-        <asp:ScriptManager ID="MasterScriptManager" runat="server" EnablePartialRendering="true">
+    <div id="page">
+        <form runat="server">
+            <asp:ScriptManager ID="MasterScriptManager" runat="server" EnableCdn="true">
+            </asp:ScriptManager>
 
-        </asp:ScriptManager>
-
-        <!--BEGIN Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top navbar-principal">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Profile.aspx">
-                        <b>Coder</b>
-                    </a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <div class="col-md-5 col-sm-3">
-                        <div class="navbar-form">
-                            <div class="form-group" style="display: inline;">
-                                <div class="input-group" style="display: table;">
-                                    <input class="form-control" name="search" placeholder="Search..." autocomplete="off" type="text">
-                                    <span class="input-group-addon" style="width: 1%;">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </span>
+            <!--BEGIN Fixed navbar -->
+            <nav class="navbar navbar-default navbar-fixed-top navbar-principal">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="Profile.aspx">
+                            <b>Coder</b>
+                        </a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <div class="col-md-5 col-sm-3">
+                            <div class="navbar-form">
+                                <div class="form-group" style="display: inline;">
+                                    <div class="input-group" style="display: table;">
+                                        <input class="form-control" name="search" placeholder="Search..." autocomplete="off" type="text">
+                                        <span class="input-group-addon" style="width: 1%;">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active">
-                            <a href="Profile.aspx"><%=currentUser.name %>
-                            <img src="img/Friends/woman-4.jpg" class="img-nav">
-                            </a>
-                        </li>
-                        <li><a href="Home.aspx"><i class="fa fa-bars"></i>&nbsp;Home</a></li>
-                        <li><a href="Messages.aspx"><i class="fa fa-comments"></i></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active">
+                                <a href="Profile.aspx"><%=currentUser.name %>
+                                    <img src="img/Friends/woman-4.jpg" class="img-nav">
+                                </a>
+                            </li>
+                            <li><a href="Home.aspx"><i class="fa fa-bars"></i>&nbsp;Home</a></li>
+                            <li><a href="Messages.aspx"><i class="fa fa-comments"></i></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages
                             <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="Photos.aspx">Photos</a></li>
-                               <%-- <li><a href="ViewPhoto.aspx">View photo</a></li>--%>
-                                <li><a href="Friends.aspx">Friends</a></li>
-                                <%--<li><a href="user_detail.html">User detail</a></li>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="Photos.aspx">Photos</a></li>
+                                    <%-- <li><a href="ViewPhoto.aspx">View photo</a></li>--%>
+                                    <li><a href="Friends.aspx">Friends</a></li>
+                                    <%--<li><a href="user_detail.html">User detail</a></li>
                                 <li><a href="list_users.html">List users</a></li>
                                 <li><a href="file_manager.html">File manager</a></li>--%>
-                                <li><a href="ProfileSettings.aspx">Profile settings</a></li>
-                               <%-- <li><a href="people_directory.html">User directory</a></li>--%>
-                                <li><a href="About.aspx">About</a></li>
-                                <li><a href="EditProfile.aspx">Edit profile</a></li>
-                               <%-- <li><a href="notifications.html">Notifications</a></li>
+                                    <li><a href="ProfileSettings.aspx">Profile settings</a></li>
+                                    <%-- <li><a href="people_directory.html">User directory</a></li>--%>
+                                    <li><a href="About.aspx">About</a></li>
+                                    <li><a href="EditProfile.aspx">Edit profile</a></li>
+                                    <%-- <li><a href="notifications.html">Notifications</a></li>
                                 <li><a href="blank-cover.html">Blank cover</a></li>
                                 <li><a href="list_posts.html">List posts</a></li>
                                 <li><a href="registration_email.html">Registration email</a></li>
@@ -132,106 +130,107 @@
                                 <li><a href="error404.html">Error 404</a></li>
                                 <li><a href="error500.html">Error 500</a></li>
                                 <li><a href="recover_password.html">Recover password</a></li>--%>
-                                <li><a href="Login.aspx">Logout</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="nav-controller"><i class="fa fa-user"></i></a></li>
-                    </ul>
+                                    <li><a href="Login.aspx">Logout</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" class="nav-controller"><i class="fa fa-user"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--END Fixed navbar -->
+
+            <!--BEGIN MAIN CONTENT-->
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <!--END MAIN CONTENT-->
+
+            <!-- Online users sidebar content-->
+            <div class="chat-sidebar focus">
+                <div class="list-group text-left">
+                    <p class="text-center visible-xs"><a href="#" class="hide-chat btn btn-success">Hide</a></p>
+                    <p class="text-center chat-title">Online users</p>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/guy-2.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Jeferh Smith</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-times-circle absent-status"></i>
+                        <img src="img/Friends/woman-1.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Dapibus acatar</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/guy-3.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Antony andrew lobghi</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/woman-2.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Maria fernanda coronel</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/guy-4.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Markton contz</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-times-circle absent-status"></i>
+                        <img src="img/Friends/woman-3.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Martha creaw</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-times-circle absent-status"></i>
+                        <img src="img/Friends/woman-8.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Yira Cartmen</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/woman-4.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Jhoanath matew</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/woman-5.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Ryanah Haywofd</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/woman-9.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Linda palma</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/woman-10.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Andrea ramos</span>
+                    </a>
+                    <a href="messages.html" class="list-group-item">
+                        <i class="fa fa-check-circle connected-status"></i>
+                        <img src="img/Friends/child-1.jpg" class="img-chat img-thumbnail">
+                        <span class="chat-user-name">Dora ty bluekl</span>
+                    </a>
                 </div>
             </div>
-        </nav>
-        <!--END Fixed navbar -->
+            <!-- Online users sidebar content-->
 
-        <!--BEGIN MAIN CONTENT-->
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        </asp:ContentPlaceHolder>
-        <!--END MAIN CONTENT-->
-
-        <!-- Online users sidebar content-->
-        <div class="chat-sidebar focus">
-            <div class="list-group text-left">
-                <p class="text-center visible-xs"><a href="#" class="hide-chat btn btn-success">Hide</a></p>
-                <p class="text-center chat-title">Online users</p>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/guy-2.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Jeferh Smith</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-times-circle absent-status"></i>
-                    <img src="img/Friends/woman-1.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Dapibus acatar</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/guy-3.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Antony andrew lobghi</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/woman-2.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Maria fernanda coronel</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/guy-4.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Markton contz</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-times-circle absent-status"></i>
-                    <img src="img/Friends/woman-3.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Martha creaw</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-times-circle absent-status"></i>
-                    <img src="img/Friends/woman-8.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Yira Cartmen</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/woman-4.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Jhoanath matew</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/woman-5.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Ryanah Haywofd</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/woman-9.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Linda palma</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/woman-10.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Andrea ramos</span>
-                </a>
-                <a href="messages.html" class="list-group-item">
-                    <i class="fa fa-check-circle connected-status"></i>
-                    <img src="img/Friends/child-1.jpg" class="img-chat img-thumbnail">
-                    <span class="chat-user-name">Dora ty bluekl</span>
-                </a>
-            </div>
-        </div>
-        <!-- Online users sidebar content-->
-
-        <!--BEGIN FOOTER-->
-        <footer class="welcome-footer">
-            <div class="container">
-                <p>
-                    <div class="footer-links">
-                        <a href="#">Terms of Use</a> |
+            <!--BEGIN FOOTER-->
+            <footer class="welcome-footer">
+                <div class="container">
+                    <p>
+                        <div class="footer-links">
+                            <a href="#">Terms of Use</a> |
                     <a href="#">Privacy Policy</a> |
                     <a href="#">Developers</a> |
                     <a href="#">Contact</a> |
                     <a href="#">About</a>
-                    </div>
-                    Copyright &copy; Company - All rights reserved
-                </p>
-            </div>
-        </footer>
-        <!--END FOOTER-->
-    </form>
+                        </div>
+                        Copyright &copy; Company - All rights reserved
+                    </p>
+                </div>
+            </footer>
+            <!--END FOOTER-->
+        </form>
+    </div>
 </body>
 </html>
