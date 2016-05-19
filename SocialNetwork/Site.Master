@@ -114,7 +114,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="Photos.aspx">Photos</a></li>
                                     <%-- <li><a href="ViewPhoto.aspx">View photo</a></li>--%>
-                                    <li><a href="Friends.aspx">Friends</a></li>
+                                    <li><a href="ListUsers.aspx">Friends</a></li>
                                     <%--<li><a href="user_detail.html">User detail</a></li>
                                 <li><a href="list_users.html">List users</a></li>
                                 <li><a href="file_manager.html">File manager</a></li>--%>
