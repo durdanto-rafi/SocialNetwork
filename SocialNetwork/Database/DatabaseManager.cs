@@ -145,5 +145,11 @@ namespace SocialNetwork.Database
             }
 
         }
+
+        public void insertComment(PostComment postComment)
+        {
+            db.PostComments.Add(postComment);
+            db.SaveChanges();
+        }
     }
 }

@@ -23,6 +23,16 @@
           <Property Name="statusTime" Type="datetime" />
           <Property Name="statusPlace" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="PostComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="postId" Type="int" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="200" />
+          <Property Name="userid" Type="int" />
+          <Property Name="commentTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
@@ -48,6 +58,7 @@
         <EntityContainer Name="SocialNetworkModelStoreContainer">
           <EntitySet Name="LoginDetails" EntityType="Self.LoginDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostComment" EntityType="Self.PostComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -80,6 +91,7 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="LoginDetails" EntityType="SocialNetworkModel.LoginDetail" />
           <EntitySet Name="Posts" EntityType="SocialNetworkModel.Post" />
+          <EntitySet Name="PostComments" EntityType="SocialNetworkModel.PostComment" />
         </EntityContainer>
         <EntityType Name="LoginDetail">
           <Key>
@@ -98,6 +110,16 @@
           <Property Name="status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="statusTime" Type="DateTime" Precision="3" />
           <Property Name="statusPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PostComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="postId" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="commentTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -145,6 +167,17 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostComments">
+            <EntityTypeMapping TypeName="SocialNetworkModel.PostComment">
+              <MappingFragment StoreEntitySet="PostComment">
+                <ScalarProperty Name="commentTime" ColumnName="commentTime" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

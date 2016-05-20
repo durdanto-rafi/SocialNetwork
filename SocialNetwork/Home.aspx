@@ -188,7 +188,7 @@
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <!-- post -->
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <% foreach (Timeline timeline in timelines)
                                         {%>
@@ -251,12 +251,18 @@
                                                 </div>
                                             </div>
                                             <div class="box-footer">
-                                                <form action="#" method="post">
                                                     <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
                                                     <div class="img-push">
-                                                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                        <%--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--%>
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <asp:TextBox ID="txtComment" runat="server" class="form-control input-sm" placeholder="Press enter to post comment"></asp:TextBox>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <asp:Button runat="server" ID="btnComment" CssClass="btn btn-primary" />
+                                                                </div>
+                                                        </div>
                                                     </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
