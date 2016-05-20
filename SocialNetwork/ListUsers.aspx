@@ -25,7 +25,7 @@
                             <tr>
                                 <td>
                                     <img src="img/Friends/guy-2.jpg" alt="">
-                                    <a href="#" class="user-link"><%=user.name.ToString() %></a>
+                                    <a href="Profile.aspx?id=<%=user.id.ToString() %>" class="user-link"><%=user.name.ToString() %></a>
                                     <span class="user-subhead">Admin</span>
                                 </td>
                                 <td><%=user.joinDate.ToString() %>

@@ -19,6 +19,7 @@ namespace SocialNetwork
             {
                 currentUser = (User)Session["UserInfo"];
                 users = databaseManager.getAllUserInfo();
+
             }
         }
     }

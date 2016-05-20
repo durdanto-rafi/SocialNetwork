@@ -19,7 +19,15 @@ namespace SocialNetwork
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
-                timelines = databaseManager.getTimeLine(currentUser);
+                if (Request.QueryString["id"] != null)
+                {
+                    int userId = Convert.ToInt32(Request.QueryString["id"]);
+                    timelines = databaseManager.getTimeLine(userId);
+                }
+                else
+                {
+                    timelines = databaseManager.getTimeLine(currentUser.id);
+                }
             }
             if (!IsPostBack)
             {
@@ -41,7 +49,7 @@ namespace SocialNetwork
             post.statusPlace = "Dhaka";
 
             databaseManager.insertPost(post);
-            timelines = databaseManager.getTimeLine(currentUser);
+            timelines = databaseManager.getTimeLine(currentUser.id);
         }
 
         protected void lnkOpenMap_Click(object sender, EventArgs e)
