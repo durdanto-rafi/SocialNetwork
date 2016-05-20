@@ -87,11 +87,8 @@ namespace SocialNetwork.Database
 
         public List<Timeline> getTimeLine(User user)
         {
-            // List<Post> posts = db.Posts.Where(x => x.userId == user.id).OrderByDescending(x => x.statusTime).ToList();
-
-
-            var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y })
-   .Where(x => x.x.userId == user.id).Select(x => new { x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status }).OrderByDescending(x => x.statusTime).ToList();
+            var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y }).Where(x => x.x.userId == user.id)
+                .Select(x => new { x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status }).OrderByDescending(x => x.statusTime).ToList();
 
             List<Timeline> timelines = new List<Timeline>();
             foreach (var item in data)
@@ -114,5 +111,12 @@ namespace SocialNetwork.Database
             }
 
         }
-    }
+
+        public List<User> getAllUserInfo()
+        {
+            List<User> users = db.Users.ToList();
+
+            return users;
+        }
+   }
 }

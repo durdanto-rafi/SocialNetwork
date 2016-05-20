@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="SocialNetwork.ListUsers" %>
 
+<%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
     <!-- Timeline content -->
     <div class="container" style="margin-top: 40px;">
         <div class="col-md-10  animated fadeInUp">
@@ -18,19 +20,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% foreach (User user in users)
+                                {%>
                             <tr>
                                 <td>
                                     <img src="img/Friends/guy-2.jpg" alt="">
-                                    <a href="#" class="user-link">Mila Kunis</a>
+                                    <a href="#" class="user-link"><%=user.name.ToString() %></a>
                                     <span class="user-subhead">Admin</span>
                                 </td>
-                                <td>2013/08/08
+                                <td><%=user.joinDate.ToString() %>
                                 </td>
                                 <td class="text-center">
                                     <span class="label label-default">Inactive</span>
                                 </td>
                                 <td>
-                                    <a href="#">mila@kunis.com</a>
+                                    <a href="#"><%=user.email.ToString() %></a>
                                 </td>
                                 <td style="width: 20%;">
                                     <a href="#" class="table-link">
@@ -53,321 +57,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/guy-3.jpg" alt="">
-                                    <a href="#" class="user-link">George Clooney</a>
-                                    <span class="user-subhead">Member</span>
-                                </td>
-                                <td>2013/08/12
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="#">marlon@brando.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/guy-5.jpg" alt="">
-                                    <a href="#" class="user-link">Ryan Gossling</a>
-                                    <span class="user-subhead">Registered</span>
-                                </td>
-                                <td>2013/03/03
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-danger">Banned</span>
-                                </td>
-                                <td>
-                                    <a href="#">jack@email.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/guy-8.jpg" alt="">
-                                    <a href="#" class="user-link">Emma Watson</a>
-                                    <span class="user-subhead">Registered</span>
-                                </td>
-                                <td>2004/01/24
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-warning">Pending</span>
-                                </td>
-                                <td>
-                                    <a href="#">humphrey@email.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/guy-7.jpg" alt="">
-                                    <a href="#" class="user-link">Robert Downey Jr.</a>
-                                    <span class="user-subhead">Admin</span>
-                                </td>
-                                <td>2013/12/31
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="#">spencer@tracy</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/woman-1.jpg" alt="">
-                                    <a href="#" class="user-link">Mila Kunis</a>
-                                    <span class="user-subhead">Admin</span>
-                                </td>
-                                <td>2013/08/08
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-default">Inactive</span>
-                                </td>
-                                <td>
-                                    <a href="#">mila@kunis.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/woman-2.jpg" alt="">
-                                    <a href="#" class="user-link">George Clooney</a>
-                                    <span class="user-subhead">Member</span>
-                                </td>
-                                <td>2013/08/12
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="#">marlon@brando.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/woman-3.jpg" alt="">
-                                    <a href="#" class="user-link">Ryan Gossling</a>
-                                    <span class="user-subhead">Registered</span>
-                                </td>
-                                <td>2013/03/03
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-danger">Banned</span>
-                                </td>
-                                <td>
-                                    <a href="#">jack@email.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/woman-4.jpg" alt="">
-                                    <a href="#" class="user-link">Emma Watson</a>
-                                    <span class="user-subhead">Registered</span>
-                                </td>
-                                <td>2004/01/24
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-warning">Pending</span>
-                                </td>
-                                <td>
-                                    <a href="#">humphrey@email.com</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="img/Friends/woman-5.jpg" alt="">
-                                    <a href="#" class="user-link">Robert Downey Jr.</a>
-                                    <span class="user-subhead">Admin</span>
-                                </td>
-                                <td>2013/12/31
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="#">spencer@tracy</a>
-                                </td>
-                                <td style="width: 20%;">
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="table-link danger">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x"></i>
-                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
+                            <%} %>
                         </tbody>
                     </table>
                 </div>
