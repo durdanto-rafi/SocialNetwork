@@ -118,5 +118,32 @@ namespace SocialNetwork.Database
 
             return users;
         }
-   }
+
+        public List<Timeline> getHome(int userId)
+        {
+            var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y })
+                .Select(x => new { x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status }).OrderByDescending(x => x.statusTime).ToList();
+
+            List<Timeline> timelines = new List<Timeline>();
+            foreach (var item in data)
+            {
+                Timeline timeline = new Timeline();
+                timeline.name = item.name;
+                timeline.status = item.status;
+                timeline.statusTime = item.statusTime;
+                timeline.statusPlace = item.statusPlace;
+                timelines.Add(timeline);
+            }
+
+            if (timelines != null)
+            {
+                return timelines;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+    }
 }
