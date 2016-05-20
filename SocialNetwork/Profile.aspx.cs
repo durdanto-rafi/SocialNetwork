@@ -14,24 +14,29 @@ namespace SocialNetwork
         DatabaseManager databaseManager = new DatabaseManager();
         public User currentUser;
         public List<Timeline> timelines;
+        public List<Timeline> timelineLeft = new List<Timeline>();
+        public List<Timeline> timelineRight = new List<Timeline>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserInfo"] != null)
-            {
-                currentUser = (User)Session["UserInfo"];
-                if (Request.QueryString["id"] != null)
-                {
-                    int userId = Convert.ToInt32(Request.QueryString["id"]);
-                    timelines = databaseManager.getTimeLine(userId);
-                }
-                else
-                {
-                    timelines = databaseManager.getTimeLine(currentUser.id);
-                }
-            }
+            
             if (!IsPostBack)
             {
-                
+                if (Session["UserInfo"] != null)
+                {
+                    currentUser = (User)Session["UserInfo"];
+                    if (Request.QueryString["id"] != null)
+                    {
+                        int userId = Convert.ToInt32(Request.QueryString["id"]);
+                        //timelines = databaseManager.getTimeLine(userId);
+                        refreshTimeline(userId);
+                        dvStatus.Visible = false;
+                    }
+                    else
+                    {
+                        //timelines = databaseManager.getTimeLine(currentUser.id);
+                        refreshTimeline(currentUser.id);
+                    }
+                }
             }
         }
 
@@ -49,7 +54,8 @@ namespace SocialNetwork
             post.statusPlace = "Dhaka";
 
             databaseManager.insertPost(post);
-            timelines = databaseManager.getTimeLine(currentUser.id);
+            //timelines = databaseManager.getTimeLine(currentUser.id);
+            refreshTimeline(currentUser.id);
         }
 
         protected void lnkOpenMap_Click(object sender, EventArgs e)
@@ -94,6 +100,23 @@ namespace SocialNetwork
         protected void btnBrowse_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void refreshTimeline(int userId)
+        {
+            timelines = databaseManager.getTimeLine(userId);
+
+            for(int i=0;i< timelines.Count;i++)
+            {
+                if(i%2==0)
+                {
+                    timelineLeft.Add(timelines[i]);
+                }
+                else
+                {
+                    timelineRight.Add(timelines[i]);
+                }
+            }
         }
     }
 }

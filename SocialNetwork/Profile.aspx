@@ -4,10 +4,6 @@
 
 <%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-
-
-
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
         <div class="row row-broken">
@@ -48,7 +44,7 @@
                         <div class="row">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <div class="col-md-12">
+                                    <div runat="server" id="dvStatus" class="col-md-12">
                                         <div class="panel profile-info">
                                             <div>
                                                 <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area " TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
@@ -76,7 +72,7 @@
                             <!-- post -->
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                 <ContentTemplate>
-                                    <% foreach (Timeline timeline in timelines)
+                                    <% foreach (Timeline timeline in timelineLeft)
                                         {%>
                                     <div class="col-md-12">
                                         <div class="box box-widget">
@@ -151,124 +147,75 @@
                     <!-- right -->
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="box box-widget">
-                                    <div class="box-header with-border">
-                                        <div class="user-block">
-                                            <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                            <span class="username"><a href="#">Katya Angintiew</a></span>
-                                            <span class="description">Shared publicly - 7:30 PM Today</span>
-                                        </div>
-                                        <div class="box-tools">
-                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
-                                                <i class="fa fa-circle-o"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                                <ContentTemplate>
+                                    <% foreach (Timeline timeline in timelineRight)
+                                        {%>
+                                    <div class="col-md-12">
+                                        <div class="box box-widget">
+                                            <div class="box-header with-border">
+                                                <div class="user-block">
+                                                    <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
+                                                    <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
+                                                    <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %></span>
+                                                </div>
+                                                <div class="box-tools">
+                                                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
+                                                        <i class="fa fa-circle-o"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <p>
+                                                    <%= timeline.status.ToString() %>
+                                                </p>
 
-                                    <div class="box-body" style="display: block;">
-                                        <img class="img-responsive pad" src="img/Photos/5.jpg" alt="Photo">
-                                        <p>I took this photo this morning. What do you guys think?</p>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                        <span class="pull-right text-muted">127 likes - 3 comments</span>
-                                    </div>
-                                    <div class="box-footer box-comments" style="display: block;">
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-6.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Maria Gonzales
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
-                                            </div>
-                                        </div>
 
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-9.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Luna Stark
+                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
+                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                            </div>
+                                            <div class="box-footer box-comments">
+                                                <div class="box-comment">
+                                                    <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
+                                                    <div class="comment-text">
+                                                        <span class="username">Maria Gonzales
                                                     <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
+                                                        </span>
+                                                        It is a long established fact that a reader will be distracted
                                                 by the readable content of a page when looking at its layout.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="box-footer" style="display: block;">
-                                        <form action="#" method="post">
-                                            <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
-                                            <div class="img-push">
-                                                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="box box-widget">
-                                    <div class="box-header with-border">
-                                        <div class="user-block">
-                                            <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                            <span class="username"><a href="#">Katya Angintiew</a></span>
-                                            <span class="description">Shared publicly - 7:30 PM Today</span>
-                                        </div>
-                                        <div class="box-tools">
-                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
-                                                <i class="fa fa-circle-o"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-
-                                    <div class="box-body" style="display: block;">
-                                        <img class="img-responsive pad" src="img/Photos/9.jpg" alt="Photo">
-                                        <p>I took this photo this morning. What do you guys think?</p>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                        <span class="pull-right text-muted">127 likes - 3 comments</span>
-                                    </div>
-                                    <div class="box-footer box-comments" style="display: block;">
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-5.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Maria Gonzales
+                                                    </div>
+                                                </div>
+                                                <div class="box-comment">
+                                                    <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
+                                                    <div class="comment-text">
+                                                        <span class="username">Nora Havisham
                                                     <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
+                                                        </span>
+                                                        The point of using Lorem Ipsum is that it has a more-or-less
+                                                normal distribution of letters, as opposed to using
+                                                'Content here, content here', making it look like readable English.
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="box-comment">
-                                            <img class="img-circle img-sm" src="img/Friends/woman-6.jpg" alt="User Image">
-                                            <div class="comment-text">
-                                                <span class="username">Luna Stark
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                </span>
-                                                It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
+                                            <div class="box-footer">
+                                                <div>
+                                                    <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                    <div class="img-push">
+                                                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="box-footer" style="display: block;">
-                                        <form action="#" method="post">
-                                            <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
-                                            <div class="img-push">
-                                                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                                    <%} %>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger EventName="Click" ControlID="btnPost" />
+                                </Triggers>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                     <!-- end right -->
