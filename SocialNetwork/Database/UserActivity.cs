@@ -12,12 +12,13 @@ namespace SocialNetwork.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class PostComment
+    public partial class UserActivity
     {
         public int Id { get; set; }
-        public int postId { get; set; }
-        public string comment { get; set; }
-        public Nullable<int> userid { get; set; }
-        public Nullable<System.DateTime> commentTime { get; set; }
+        public string type { get; set; }
+        public string details { get; set; }
+        public Nullable<System.DateTime> time { get; set; }
+        public Nullable<int> postId { get; set; }
+        public Nullable<int> userId { get; set; }
     }
 }

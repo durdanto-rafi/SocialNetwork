@@ -15,19 +15,71 @@
         $(document).on('ready', function () {
             $('.btn-like').on('click', function (e) {
                 e.preventDefault();
-                var post = $(this).attr('data-post');
-                alert('You liked ' + post);
+                var postId = $(this).attr('data-post');
+                alert('You liked ' + postId);
+
+                var postdata = JSON.stringify(
+                   {
+                       "func":'L',
+                       "val1":'',
+                       "val2": postId,
+                       "val3":  <%= currentUser.id %>,
+                       "val4": ''
+                   });
+
+                loadJsonData(postdata);
             });
 
 
             $('.input-comment-button').on('click', function (e) {
                 e.preventDefault();
-                var status = $(this).attr('data-post');
+                var postId = $(this).attr('data-post');
                 var comment = $(this).prev('input').val();
                 alert('You commented: ' + comment + ' on status ' + status);
 
+                var postdata = JSON.stringify(
+                   {
+                       "func": 'C',
+                       "val1": comment,
+                       "val2": postId,
+                       "val3": <%= currentUser.id %>,
+                       "val4": ''
+                   });
+
+                loadJsonData(postdata);
+
             });
         });
+
+
+        function loadJsonData(postdata) {
+            //var postdata = JSON.stringify(
+            //    {
+            //        "From": 'FFF',
+            //        "To": 'TTT',
+            //        "Body": 'BBB'
+            //    });
+
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "Handlers/AjaxHandler.ashx",
+                    cache: false,
+                    data: postdata,
+                    dataType: "json",
+                    success: getSuccess,
+                    error: getFail
+                });
+            } catch (e) {
+                alert(e);
+            }
+            function getSuccess(data, textStatus, jqXHR) {
+                alert(data.Response);
+            };
+            function getFail(jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+            };
+        };
     </script>
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">

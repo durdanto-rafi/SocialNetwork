@@ -12,5 +12,8 @@ namespace SocialNetwork.Database
         public string status { get; set; }
         public Nullable<System.DateTime> statusTime { get; set; }
         public string statusPlace { get; set; }
+        public int likesCount { get; set; }
+        public int commentsCount { get; set; }
+        public List<Comment> comments { get; set; }
     }
 }

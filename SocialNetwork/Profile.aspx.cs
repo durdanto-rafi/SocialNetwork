@@ -74,7 +74,7 @@ namespace SocialNetwork
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-           
+
 
         }
 
@@ -87,9 +87,9 @@ namespace SocialNetwork
         {
             timelines = databaseManager.getTimeLine(userId);
 
-            for(int i=0;i< timelines.Count;i++)
+            for (int i = 0; i < timelines.Count; i++)
             {
-                if(i%2==0)
+                if (i % 2 == 0)
                 {
                     timelineLeft.Add(timelines[i]);
                 }
@@ -99,7 +99,7 @@ namespace SocialNetwork
                 }
             }
         }
-        
+
         protected void btncrop_Click(object sender, EventArgs e)
         {
             try

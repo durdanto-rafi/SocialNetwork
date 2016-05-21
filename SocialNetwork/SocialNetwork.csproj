@@ -232,6 +232,7 @@
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
+    <Content Include="Handlers\AjaxHandler.ashx" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
     <EntityDeploy Include="Database\SocialNetworkDB.edmx">
@@ -259,14 +260,15 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Database\Comments.cs" />
     <Compile Include="Database\DatabaseManager.cs" />
     <Compile Include="Database\Post.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\PostComment.cs">
+    <Compile Include="Database\Timeline.cs" />
+    <Compile Include="Database\UserActivity.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Timeline.cs" />
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -281,6 +283,7 @@
     <Compile Include="Friends.aspx.designer.cs">
       <DependentUpon>Friends.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\HandlerValuePass.cs" />
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -304,6 +307,10 @@
     </Compile>
     <Compile Include="Database\LoginDetail.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mail.cs" />
+    <Compile Include="Handlers\AjaxHandler.ashx.cs">
+      <DependentUpon>AjaxHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Messages.aspx.cs">
       <DependentUpon>Messages.aspx</DependentUpon>
