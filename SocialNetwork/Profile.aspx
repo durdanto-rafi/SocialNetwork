@@ -3,6 +3,32 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="Ajax" %>
 <%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript">
+        function UploadFile(fileUpload) {
+            if (fileUpload.value != '') {
+                document.getElementById("<%=btnUpload.ClientID %>").click();
+            }
+        }
+
+    </script>
+    <script>
+        $(document).on('ready', function () {
+            $('.btn-like').on('click', function (e) {
+                e.preventDefault();
+                var post = $(this).attr('data-post');
+                alert('You liked ' + post);
+            });
+
+
+            $('.input-comment-button').on('click', function (e) {
+                e.preventDefault();
+                var status = $(this).attr('data-post');
+                var comment = $(this).prev('input').val();
+                alert('You commented: ' + comment + ' on status ' + status);
+
+            });
+        });
+    </script>
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
         <div class="row row-broken">
@@ -96,7 +122,7 @@
 
 
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                                <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
                                                 <span class="pull-right text-muted">45 likes - 2 comments</span>
                                             </div>
                                             <div class="box-footer box-comments">
@@ -126,7 +152,8 @@
                                                 <div>
                                                     <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
                                                     <div class="img-push">
-                                                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
+                                                        <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-primary input-comment-button">Send</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,11 +249,13 @@
             </div>
         </div>
     </div>
+
+
     <!-- end timeline content-->
 
     <!--BEGIN MODAL-->
     <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="modal-content">
@@ -239,32 +268,36 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="animated fadeInUp ">
-                                    <div class="col-sm-1">
-                                    </div>
                                     <div class="col-sm-10">
-                                        <%--<img src="img/Photos/4.jpg" class="img-responsive" alt="">--%>
-                                        <asp:Image ID="imgModal" runat="server" src="img/Photos/4.jpg" class="img-responsive" alt="" />
-                                    </div>
-                                    <div class="col-sm-1">
+                                        <img src="" id="imgcrop" runat="server" class="img-responsive" alt="sample image" />
+                                        <input type="hidden" id="hdnx" runat="server" />
+                                        <input type="hidden" id="hdny" runat="server" />
+                                        <input type="hidden" id="hdnw" runat="server" />
+                                        <input type="hidden" id="hdnh" runat="server" />
+                                        <asp:Button ID="btncrop" runat="server" OnClick="btncrop_Click" Text="Crop Images" />
+                                        <img id="imgcropped" runat="server" visible="false" />
+                                        <asp:FileUpload ID="upload" runat="server" />
+                                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
+                                        <input type="hidden" id="imageName" runat="server" />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal-footer">
+                        <%--<div class="modal-footer">
                             <div class="col-lg-12">
                                 <asp:FileUpload Text="Browse" class="btn btn-default btn-file" ID="btnBrowse" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" OnClick="btnBrowse_Click" />
-                                <asp:Button Text="Upload" class="btn btn-success" ID="btnUpload" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" OnClick="btnUpload_Click" />
+                                <asp:Button Text="Upload" class="btn btn-success" ID="btnUpload2" runat="server" ValidationGroup="validate" UseSubmitBehavior="False" />
                                 <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
 
                             </div>
-                        </div>
+                        </div>--%>
                 </ContentTemplate>
                 <Triggers>
-                    <%--<asp:AsyncPostBackTrigger EventName="Click" ControlID="btnAddRow" />--%>
                 </Triggers>
             </asp:UpdatePanel>
         </div>
+    </div>
     </div>
     <!--END MODAL-->
 </asp:Content>

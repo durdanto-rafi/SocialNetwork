@@ -1,6 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="SocialNetwork.EditProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <script type="text/javascript" language="javascript">
+        function TestCodeBehind() {
+            document.getElementById('<%= Label1.ClientID %>').innerHTML = '<%= CodeBehind() %>';
+            return false;
+        }
+
+
+        function TestCodeBehind2() {
+            document.getElementById('<%= Button2.ClientID %>').click();
+             //  return false;
+         }
+
+
+    </script>
+
+
     <div class="row text-center color-container">
         <h1 class="profile-name">Katya Angintiew</h1>
     </div>
@@ -95,4 +112,13 @@
         </div>
     </div>
     <!--End Timeline content -->
+    <asp:Button ID="btncrop" runat="server" OnClick="btncrop_Click" Text="Crop Images" />
+    <asp:FileUpload ID="upload" runat="server" />
+
+    <input id="Button1" type="button" value="Sample One" onclick="javascript: TestCodeBehind()" />
+    <input id="Button3" type="button" value="Sample two" onclick="javascript: TestCodeBehind2()" />
+    <asp:Button ID="Button2" runat="server" Text="" OnClick="ClickedME" />
+    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+
+
 </asp:Content>
