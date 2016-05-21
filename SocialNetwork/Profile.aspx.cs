@@ -49,17 +49,32 @@ namespace SocialNetwork
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
+
+                if (txtStatus.Text.Trim().Length < 1)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please enter your status');", true);
+
+                }
+                else
+                {
+                    Post post = new Post();
+                    post.userId = currentUser.id;
+                    post.status = txtStatus.Text.Trim();
+                    post.statusTime = DateTime.Now;
+                    post.statusPlace = "Dhaka";
+
+                    databaseManager.insertPost(post);
+                    //timelines = databaseManager.getTimeLine(currentUser.id);
+                    refreshTimeline(currentUser.id);
+                }
             }
 
-            Post post = new Post();
-            post.userId = currentUser.id;
-            post.status = txtStatus.Text.Trim();
-            post.statusTime = DateTime.Now;
-            post.statusPlace = "Dhaka";
+            else
+            {
+                Response.Redirect("Error.aspx");
+            }
 
-            databaseManager.insertPost(post);
-            //timelines = databaseManager.getTimeLine(currentUser.id);
-            refreshTimeline(currentUser.id);
+
         }
 
         protected void lnkOpenMap_Click(object sender, EventArgs e)
@@ -166,5 +181,6 @@ namespace SocialNetwork
             // upload.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(upload.FileName)));
             imageName.Value = image();
         }
+
     }
 }

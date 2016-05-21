@@ -10,8 +10,8 @@
             }
         }
 
-    </script>
-    <script>
+    
+        //debugger;
         $(document).on('ready', function () {
             $('.btn-like').on('click', function (e) {
                 e.preventDefault();
@@ -37,7 +37,13 @@
                 var comment = $(this).prev('input').val();
                 alert('You commented: ' + comment + ' on status ' + status);
 
-                var postdata = JSON.stringify(
+                if(comment.length<1)
+                {
+                    errorAlert('Comment section is empty !');
+                }
+                else
+                {
+                    var postdata = JSON.stringify(
                    {
                        "func": 'C',
                        "val1": comment,
@@ -46,40 +52,48 @@
                        "val4": ''
                    });
 
-                loadJsonData(postdata);
+                   loadJsonData(postdata);
+               }
+
+                
 
             });
         });
 
 
-        function loadJsonData(postdata) {
-            //var postdata = JSON.stringify(
-            //    {
-            //        "From": 'FFF',
-            //        "To": 'TTT',
-            //        "Body": 'BBB'
-            //    });
+       function loadJsonData(postdata) {
+           try {
+               $.ajax({
+                   type: "POST",
+                   url: "Handlers/AjaxHandler.ashx",
+                   cache: false,
+                   data: postdata,
+                   dataType: "json",
+                   success: getSuccess,
+                   error: getFail
+               });
+           } catch (e) {
+               alert(e);
 
-            try {
-                $.ajax({
-                    type: "POST",
-                    url: "Handlers/AjaxHandler.ashx",
-                    cache: false,
-                    data: postdata,
-                    dataType: "json",
-                    success: getSuccess,
-                    error: getFail
-                });
-            } catch (e) {
-                alert(e);
-            }
-            function getSuccess(data, textStatus, jqXHR) {
-                alert(data.Response);
-            };
-            function getFail(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.status);
-            };
-        };
+           }
+           function getSuccess(data, textStatus, jqXHR) {
+               //alert(data.Response);
+               successalert("Success !",data.Response);
+           };
+           function getFail(jqXHR, textStatus, errorThrown) {
+               alert(jqXHR.status);
+           };
+       };
+
+       var UpdatePanel1 = '<%=UpdatePanel1.ClientID%>';
+       function ShowItems()
+       {
+           if (UpdatePanel1 != null) 
+           {
+               __doPostBack(UpdatePanel1, '');
+               alert("AA");
+           }
+       }   
     </script>
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
@@ -119,7 +133,7 @@
                     <!-- left -->
                     <div class="col-md-6">
                         <div class="row">
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
                                 <ContentTemplate>
                                     <div runat="server" id="dvStatus" class="col-md-12">
                                         <div class="panel profile-info">
@@ -128,7 +142,6 @@
                                             </div>
                                             <div class="panel-footer">
                                                 <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" ClientIDMode="AutoID" OnClick="btnPost_Click" />
-
                                                 <ul class="nav nav-pills">
                                                     <li>
                                                         <asp:LinkButton ID="lnkOpenMap" runat="server" OnClick="lnkOpenMap_Click"><i class="fa fa-map-marker" ></i></asp:LinkButton></li>
@@ -175,37 +188,28 @@
 
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
                                             </div>
                                             <div class="box-footer box-comments">
+                                                <% foreach (Comment comment in timeline.comments)
+                                                    {%>
                                                 <div class="box-comment">
                                                     <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
                                                     <div class="comment-text">
-                                                        <span class="username">Maria Gonzales
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
+                                                        <span class="username"><%= comment.name.ToString() %>
+                                                            <span class="text-muted pull-right"><%= comment.time.ToString() %></span>
                                                         </span>
-                                                        It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
+                                                        <%= comment.details %>
                                                     </div>
                                                 </div>
-                                                <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
-                                                    <div class="comment-text">
-                                                        <span class="username">Nora Havisham
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                        </span>
-                                                        The point of using Lorem Ipsum is that it has a more-or-less
-                                                normal distribution of letters, as opposed to using
-                                                'Content here, content here', making it look like readable English.
-                                                    </div>
-                                                </div>
+                                                <%} %>
                                             </div>
                                             <div class="box-footer">
                                                 <div>
                                                     <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
                                                     <div class="img-push">
                                                         <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
-                                                        <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-primary input-comment-button">Send</button>
+                                                        <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,37 +256,29 @@
 
 
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                                <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
                                             </div>
                                             <div class="box-footer box-comments">
+                                                <% foreach (Comment comment in timeline.comments)
+                                                    {%>
                                                 <div class="box-comment">
                                                     <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
                                                     <div class="comment-text">
-                                                        <span class="username">Maria Gonzales
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
+                                                        <span class="username"><%= comment.name.ToString() %>
+                                                            <span class="text-muted pull-right"><%= comment.time.ToString() %></span>
                                                         </span>
-                                                        It is a long established fact that a reader will be distracted
-                                                by the readable content of a page when looking at its layout.
+                                                        <%= comment.details %>
                                                     </div>
                                                 </div>
-                                                <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
-                                                    <div class="comment-text">
-                                                        <span class="username">Nora Havisham
-                                                    <span class="text-muted pull-right">8:03 PM Today</span>
-                                                        </span>
-                                                        The point of using Lorem Ipsum is that it has a more-or-less
-                                                normal distribution of letters, as opposed to using
-                                                'Content here, content here', making it look like readable English.
-                                                    </div>
-                                                </div>
+                                                <%} %>
                                             </div>
                                             <div class="box-footer">
                                                 <div>
                                                     <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
                                                     <div class="img-push">
-                                                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
+                                                        <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
                                                     </div>
                                                 </div>
                                             </div>

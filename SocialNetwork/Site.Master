@@ -75,13 +75,18 @@
 
 
     <script type="text/javascript">
-        function successalert() {
+        function successalert(Title,Text) {
             swal({
-                title: 'Congratulations!',
-                text: 'Your message has been succesfully sent',
+                title: Title,
+                text: Text,
                 type: 'success'
             });
         }
+
+        function errorAlert(message) {
+            sweetAlert("Oops...", message, "error");
+        }
+
     </script>
 
     <!--END SELECTED MENU ITEM -->
@@ -236,7 +241,7 @@
             <!-- Online users sidebar content-->
 
             <!--BEGIN FOOTER-->
-            <%--<footer class="welcome-footer">
+            <footer class="welcome-footer">
                 <div class="container">
                     <p>
                         <div class="footer-links">
@@ -249,7 +254,7 @@
                         Copyright &copy; Company - All rights reserved
                     </p>
                 </div>
-            </footer>--%>
+            </footer>
             <!--END FOOTER-->
         </form>
     </div>

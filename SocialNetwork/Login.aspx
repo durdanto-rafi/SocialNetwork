@@ -25,11 +25,11 @@
     <%--<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src="assets/js/custom.js"></script>
+
     <script src="assets/js/jquery.1.11.1.min.js"></script>
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
-
-     <script src="sweet-alert/sweetalert.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="sweet-alert/sweetalert.min.js"></script>
     <link href="sweet-alert/sweetalert.css" rel="stylesheet" />
 
     <script type="text/javascript">
@@ -47,11 +47,10 @@
             });
         }
 
-        function errorAlert(message)
-        {
+        function errorAlert(message) {
             sweetAlert("Oops...", message, "error");
         }
-        
+
     </script>
 
 </head>
@@ -75,7 +74,7 @@
                         <asp:Button ID="btnLogin" runat="server" class="btn btn-info btn-lg" Text="Login" OnClick="btnLogin_Click" />
                         <asp:Button ID="btnReg" runat="server" class="btn btn-info btn-lg btn-frm" Text="Register" OnClick="btnReg_Click" OnClientClick="myClosure();" />
                     </form>
-                    
+
                 </div>
             </div>
             <div class="row welcome-full animated fadeInLeft users-row">
