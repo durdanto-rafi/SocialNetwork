@@ -22,19 +22,23 @@ namespace SocialNetwork
         DatabaseManager databaseManager = new DatabaseManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["UserInfo"] != null)
             {
-                if (Session["UserInfo"] != null)
+                currentUser = (User)Session["UserInfo"];
+
+                if (!IsPostBack)
                 {
-                    currentUser = (User)Session["UserInfo"];
 
                     txtFirstName.Text = currentUser.firstName;
                     txtLastName.Text = currentUser.lastName;
                     txtPhone.Text = currentUser.phone;
                     txtAddress.Text = currentUser.address;
                     imgProPic.Src = currentUser.profilePic;
+
                 }
             }
+
+            
         }
 
         public static System.Drawing.Image PadImage(System.Drawing.Image originalImage)
@@ -64,6 +68,12 @@ namespace SocialNetwork
                 currentUser.lastName = txtLastName.Text.Trim();
                 currentUser.phone = txtPhone.Text.Trim();
                 currentUser.address = txtAddress.Text.Trim();
+                if (hiddenImageName.Value.Length > 0)
+                {
+                    currentUser.profilePic = hiddenImageName.Value;
+                    hiddenImageName.Value = "";
+                }
+
 
                 databaseManager.updateUser(currentUser);
             }
@@ -71,13 +81,7 @@ namespace SocialNetwork
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-
-            if (Session["UserInfo"] != null)
-            {
-                currentUser = (User)Session["UserInfo"];
-                currentUser.profilePic = "Uploads/" + image();
-            }
-
+            hiddenImageName.Value = "Uploads/" + image();
         }
 
 

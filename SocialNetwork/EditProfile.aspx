@@ -101,6 +101,7 @@
                 </div>
             </div>
         </div>
+        <asp:HiddenField ID="hiddenImageName" runat="server" Value="" />
     </div>
     <!--End Timeline content -->
 

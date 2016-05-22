@@ -31,8 +31,6 @@ namespace SocialNetwork
         public List<Timeline> timelineLeft = new List<Timeline>();
         public List<Timeline> timelineRight = new List<Timeline>();
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             upload.Attributes["onchange"] = "UploadFile(this)";

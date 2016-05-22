@@ -19,11 +19,9 @@ namespace SocialNetwork
             {
                 currentUser = (User)Session["UserInfo"];
             }
-
             listUsers();
             
         }
-
         private void listUsers()
         {
             users = databaseManager.getAllUserInfo();

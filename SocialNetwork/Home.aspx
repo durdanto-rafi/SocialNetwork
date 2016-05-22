@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="panel-footer">
                                                 <asp:Button ID="btnPost" runat="server" class="btn btn-info pull-right" Text="Post" OnClick="btnPost_Click" />
-                                               
+
                                                 <ul class="nav nav-pills">
                                                     <li>
                                                         <asp:LinkButton ID="lnkOpenMap" runat="server"><i class="fa fa-map-marker" ></i></asp:LinkButton></li>
@@ -196,9 +196,9 @@
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
-                                                    <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
-                                                    <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
-                                                    <span class="description">Shared publicly - <%=timeline.statusTime.ToString() %> - <%=timeline.statusPlace %></span>
+                                                    <img class="img-circle" src="<%=timeline.profilePic %>" alt="User Image">
+                                                    <span class="username"><a href="#"><%=timeline.name %></a></span>
+                                                    <span class="description">Shared publicly - <%=timeline.statusTime.ToString() %> @ <%=timeline.statusPlace %></span>
                                                 </div>
                                                 <div class="box-tools">
                                                     <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
@@ -208,61 +208,42 @@
                                                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="box-body">
-                                                <p>
-                                                    <%=timeline.status.ToString() %>
-                                                </p>
+                                            <div class="box-body" style="display: block;">
+                                                <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                                <p><%=timeline.status.ToString() %></p>
 
-                                                <div class="attachment-block clearfix">
-                                                    <img class="attachment-img" src="img/Photos/6.jpg" alt="Attachment Image">
-                                                    <div class="attachment-pushed">
-                                                        <h4 class="attachment-heading"><a href="#">Lorem ipsum text generator</a></h4>
-                                                        <div class="attachment-text">
-                                                            Description about the attachment can be placed here.
-							    Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %></span>
                                             </div>
                                             <div class="box-footer box-comments">
+                                                <% foreach (Comment comment in timeline.comments)
+                                                    {%>
                                                 <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
+                                                    <img class="img-circle img-sm" src=" <%= comment.userImage %>" alt="User Image">
                                                     <div class="comment-text">
-                                                        <span class="username">Maria Gonzales
-							      <span class="text-muted pull-right">8:03 PM Today</span>
+                                                        <span class="username"><%= comment.name.ToString() %>
+                                                            <span class="text-muted pull-right"><%= comment.time.ToString() %></span>
                                                         </span>
-                                                        It is a long established fact that a reader will be distracted
-							      by the readable content of a page when looking at its layout.
+                                                        <%= comment.details %>
                                                     </div>
                                                 </div>
-                                                <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-3.jpg" alt="User Image">
-                                                    <div class="comment-text">
-                                                        <span class="username">Nora Havisham
-							      <span class="text-muted pull-right">8:03 PM Today</span>
-                                                        </span>
-                                                        The point of using Lorem Ipsum is that it has a more-or-less
-							      normal distribution of letters, as opposed to using
-							      'Content here, content here', making it look like readable English.
-                                                    </div>
-                                                </div>
+                                                <%} %>
                                             </div>
                                             <div class="box-footer">
-                                                    <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
-                                                    <div class="img-push">
-                                                        <%--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--%>
-                                                        <div class="row">
-                                                            <div class="col-lg-8">
-                                                                <asp:TextBox ID="txtComment" runat="server" class="form-control input-sm" placeholder="Press enter to post comment"></asp:TextBox>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <asp:Button runat="server" ID="btnComment" CssClass="btn btn-primary" />
-                                                                </div>
+                                                <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                <div class="img-push">
+                                                    <%--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--%>
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <asp:TextBox ID="txtComment" runat="server" class="form-control input-sm" placeholder="Press enter to post comment"></asp:TextBox>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <asp:Button runat="server" ID="btnComment" CssClass="btn btn-primary" />
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

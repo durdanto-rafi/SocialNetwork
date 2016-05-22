@@ -146,8 +146,35 @@ namespace SocialNetwork.Database
 
         public List<Timeline> getHome(int userId)
         {
+            //var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y })
+            //    .Select(x => new { x.x.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status }).OrderByDescending(x => x.statusTime).ToList();
+
+            //List<Timeline> timelines = new List<Timeline>();
+            //foreach (var item in data)
+            //{
+            //    Timeline timeline = new Timeline();
+            //    timeline.postId = item.id;
+            //    timeline.name = item.name;
+            //    timeline.status = item.status;
+            //    timeline.statusTime = item.statusTime;
+            //    timeline.statusPlace = item.statusPlace;
+            //    timelines.Add(timeline);
+            //}
+
+            //if (timelines != null)
+            //{
+            //    return timelines;
+            //}
+            //else
+            //{
+            //    return null;
+            //}
+
+
+
             var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y })
-                .Select(x => new { x.x.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status }).OrderByDescending(x => x.statusTime).ToList();
+               .Select(x => new { x.x.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status, x.x.attachment, x.y.profilePic, x.y.address, x.y.firstName, x.y.lastName })
+               .OrderByDescending(x => x.statusTime).ToList(); ;
 
             List<Timeline> timelines = new List<Timeline>();
             foreach (var item in data)
@@ -158,6 +185,28 @@ namespace SocialNetwork.Database
                 timeline.status = item.status;
                 timeline.statusTime = item.statusTime;
                 timeline.statusPlace = item.statusPlace;
+                timeline.attachment = item.attachment;
+                timeline.likesCount = db.UserActivities.Where(x => x.postId == item.id && x.type == "L").Count();
+                timeline.commentsCount = db.UserActivities.Where(x => x.postId == item.id && x.type == "C").Count();
+                timeline.profilePic = item.profilePic;
+                timeline.address = item.address;
+                timeline.fullName = item.firstName + " " + item.lastName;
+
+
+                var comments = db.UserActivities.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y }).Where(x => x.x.postId == item.id && x.x.type == "C")
+               .Select(x => new { x.y.name, x.x.details, x.x.time, x.y.profilePic }).OrderBy(x => x.time).ToList();
+
+                List<Comment> com = new List<Comment>();
+                for (int i = 0; i < comments.Count; i++)
+                {
+                    Comment comment = new Comment();
+                    comment.name = comments[i].name;
+                    comment.details = comments[i].details;
+                    comment.time = comments[i].time;
+                    comment.userImage = comments[i].profilePic;
+                    com.Add(comment);
+                }
+                timeline.comments = com;
                 timelines.Add(timeline);
             }
 
@@ -169,6 +218,8 @@ namespace SocialNetwork.Database
             {
                 return null;
             }
+
+
 
         }
 
