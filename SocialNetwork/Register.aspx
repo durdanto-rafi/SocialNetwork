@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Craze -</title>
+    <title><%: Page.Title %> - Coder -</title>
 
     <%--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
 
@@ -26,8 +26,9 @@
     <%--<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src="assets/js/custom.js"></script>
+    
     <script src="assets/js/jquery.1.11.1.min.js"></script>
+    <script src="assets/js/custom.js"></script>
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
@@ -59,7 +60,7 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <img src="img/prism.png" class="user-avatar" />
-                    <h1>People-Let</h1>
+                    <h1>Connect to us !</h1>
                     <form role="form" class="frm animated flipInX" runat="server">
                         <div class="form-content">
                             <div class="form-group">

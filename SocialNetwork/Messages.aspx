@@ -338,9 +338,11 @@
                                         <div class="time">5 min ago</div>
                                     </div>
                                     <div class="answer-add">
-                                        <input placeholder="Write a message">
+                                       <%-- <input placeholder="Write a message">--%>
+                                        <asp:TextBox ID="txtMessage" runat ="server" placeholder="Write a message"></asp:TextBox>
                                         <span class="answer-btn answer-btn-1"></span>
-                                        <span class="answer-btn answer-btn-2"></span>
+                                        <asp:Button ID="btnMessageSend" runat="server" OnClick="btnMessageSend_Click" class="answer-btn answer-btn-2" />
+                                       <%-- <span class="answer-btn answer-btn-2"></span>--%>
                                     </div>
                                 </div>
                             </div>

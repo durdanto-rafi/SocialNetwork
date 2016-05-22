@@ -261,6 +261,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Database\Comments.cs" />
     <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="Database\Message.cs">
+      <DependentUpon>SocialNetworkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Post.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>

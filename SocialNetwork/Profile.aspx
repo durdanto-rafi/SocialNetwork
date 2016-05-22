@@ -14,11 +14,10 @@
     
         //debugger;
         $(document).on('ready', function () {
-            $('.btn-like').on('click', function (e) {
+            $(document).on('click', '.btn-like', function (e) {
                 e.preventDefault();
                 var postId = $(this).attr('data-post');
-                alert('You liked ' + postId);
-
+                
                 var postdata = JSON.stringify(
                    {
                        "func":'L',
@@ -28,16 +27,15 @@
                        "val4": ''
                    });
 
-                loadJsonData(postdata);
+                loadJsonData(postdata , $(this) , postId , '' , 'L');
             });
 
 
-            $('.input-comment-button').on('click', function (e) {
+            $(document).on('click', '.timelineData .input-comment-button', function (e) {
                 e.preventDefault();
                 var postId = $(this).attr('data-post');
                 var comment = $(this).prev('input').val();
-                alert('You commented: ' + comment + ' on status ' + status);
-
+                
                 if(comment.length<1)
                 {
                     errorAlert('Comment section is empty !');
@@ -53,7 +51,8 @@
                        "val4": ''
                    });
 
-                   loadJsonData(postdata);
+                   loadJsonData(postdata , $(this) , postId, comment , 'C');
+
                }
 
                 
@@ -62,24 +61,52 @@
         });
 
 
-       function loadJsonData(postdata) {
-           try {
-               $.ajax({
-                   type: "POST",
-                   url: "Handlers/AjaxHandler.ashx",
-                   cache: false,
-                   data: postdata,
-                   dataType: "json",
-                   success: getSuccess,
-                   error: getFail
-               });
-           } catch (e) {
-               alert(e);
+       function loadJsonData(postdata , actionElement , postId ,inputValue , type) {
+           
+           $.ajax({
+               type: "POST",
+               url: "Handlers/AjaxHandler.ashx",
+               cache: false,
+               data: postdata,
+               dataType: "json",
+               success: getSuccess,
+               error: getFail
+           });
+           
+           $postArray = postdata;
 
-           }
            function getSuccess(data, textStatus, jqXHR) {
+               console.log(data.Response[0]);
+               console.log(data.Response[1]);
+
+               var commentCounter = $('span#commentsCount-' + postId );
+               var likesCounter = $('span#likesCount-' + postId );
+
                //alert(data.Response);
-               successalert("Success !",data.Response);
+               if(type == 'C'){
+                   console.log(type);
+                   console.log(inputValue);
+                   var profilePic = "<%= currentUser.profilePic %>";
+                   var userName = "<%= currentUser.name %>";
+
+                   var newComment = "<div class='box-comment'><img alt='User Image' src='" + profilePic + "' class='img-circle img-sm'><div class='comment-text'><span class='username'>" + userName + "<span class='text-muted pull-right'>Just Now</span></span>" + inputValue +
+                                    "</div>";
+                   
+                   var commentContainer = $('#commentsContainer-' + postId );
+
+                   
+
+                   commentContainer.append(newComment);
+                   var input = actionElement.prev(input);
+                   input.val('');
+                   commentCounter.html(data.Response[0] + ' comments ');
+                   likesCounter.html(data.Response[1] + ' likes ');
+               }else{
+                   console.log(type);
+                   commentCounter.html(data.Response[0] + ' comments ');
+                   console.log('received '+data.Response[1]);
+                   likesCounter.html(data.Response[1] + ' likes ');
+               }
            };
            function getFail(jqXHR, textStatus, errorThrown) {
                alert(jqXHR.status);
@@ -87,14 +114,14 @@
        };
 
        var UpdatePanel1 = '<%=UpdatePanel1.ClientID%>';
-       function ShowItems()
-       {
-           if (UpdatePanel1 != null) 
-           {
-               __doPostBack(UpdatePanel1, '');
-               alert("AA");
-           }
-       }   
+        function ShowItems()
+        {
+            if (UpdatePanel1 != null) 
+            {
+                __doPostBack(UpdatePanel1, '');
+                alert("AA");
+            }
+        }   
     </script>
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
@@ -177,7 +204,7 @@
                                 <ContentTemplate>
                                     <% foreach (Timeline timeline in timelineLeft)
                                         {%>
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12 timelineData">
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
@@ -198,9 +225,14 @@
                                                 <p><%= timeline.status.ToString() %> </p>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
+
+                                                <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
+                                                <span class="pull-right">&nbsp - &nbsp;</span>
+                                                <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
+                                                
                                             </div>
-                                            <div class="box-footer box-comments">
+
+                                            <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
                                                 <div class="box-comment">
@@ -244,7 +276,7 @@
                                 <ContentTemplate>
                                     <% foreach (Timeline timeline in timelineRight)
                                         {%>
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12 timelineData">
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
@@ -265,9 +297,12 @@
                                                 <p><%= timeline.status.ToString() %> </p>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
-                                            </div>
-                                            <div class="box-footer box-comments">
+                                                
+                                                <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
+                                                <span class="pull-right">&nbsp - &nbsp;</span>
+                                                <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
+                                                </div>
+                                            <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
                                                 <div class="box-comment">

@@ -13,6 +13,16 @@
           <Property Name="userId" Type="int" />
           <Property Name="loginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="messageText" Type="nvarchar(max)" />
+          <Property Name="from" Type="int" />
+          <Property Name="to" Type="int" />
+          <Property Name="messageTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="id" />
@@ -62,6 +72,7 @@
         </EntityType>
         <EntityContainer Name="SocialNetworkModelStoreContainer">
           <EntitySet Name="LoginDetails" EntityType="Self.LoginDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserActivity" EntityType="Self.UserActivity" Schema="dbo" store:Type="Tables" />
@@ -75,6 +86,7 @@
           <EntitySet Name="UserActivities" EntityType="SocialNetworkModel.UserActivity" />
           <EntitySet Name="Posts" EntityType="SocialNetworkModel.Post" />
           <EntitySet Name="Users" EntityType="SocialNetworkModel.User" />
+          <EntitySet Name="Messages" EntityType="SocialNetworkModel.Message" />
         </EntityContainer>
         <EntityType Name="LoginDetail">
           <Key>
@@ -130,6 +142,16 @@
           <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="about" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="messageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="from" Type="Int32" />
+          <Property Name="to" Type="Int32" />
+          <Property Name="messageTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -193,6 +215,17 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="SocialNetworkModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="messageTime" ColumnName="messageTime" />
+                <ScalarProperty Name="to" ColumnName="to" />
+                <ScalarProperty Name="from" ColumnName="from" />
+                <ScalarProperty Name="messageText" ColumnName="messageText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

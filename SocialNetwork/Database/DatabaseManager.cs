@@ -241,5 +241,22 @@ namespace SocialNetwork.Database
             var user = db.Users.Where(x => x.id == userId).ToList();
             return user[0];
         }
+
+
+        public int getLikeCount(int postId)
+        {
+            return db.UserActivities.Where(x => x.postId == postId && x.type == "L").Count();
+        }
+
+        public int getCommentCount(int postId)
+        {
+            return db.UserActivities.Where(x => x.postId == postId && x.type == "C").Count();
+        }
+
+        public void insertComment(Message message)
+        {
+            db.Messages.Add(message);
+            db.SaveChanges();
+        }
     }
 }

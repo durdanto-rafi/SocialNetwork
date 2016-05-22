@@ -29,5 +29,6 @@ namespace SocialNetwork.Database
         public virtual DbSet<UserActivity> UserActivities { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

@@ -48,13 +48,16 @@ namespace SocialNetwork
                         databaseManager.insertUserActivity(userActivity);
 
                     }
+
+                    int comments = databaseManager.getCommentCount(Convert.ToInt32(value.val2));
+                    int likes = databaseManager.getLikeCount(Convert.ToInt32(value.val2));
                     
                     //You can write here the code to send Email, see ,the Class System.Net.Mail.MailMessage on MSDN
                     //Once the Mail is sent succefully, you can send back a response to the Client informing him that everything is okay !
                     context.Response.Write(jSerialize.Serialize(
                          new
                          {
-                             Response = "Message Has been sent succesfully"
+                             Response = new int [] { comments, likes }
                          }));
                 }
             }
