@@ -36,7 +36,7 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="firstName" Type="nvarchar" MaxLength="50" />
           <Property Name="lastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="phone" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="address" Type="nvarchar" MaxLength="200" />
           <Property Name="birthday" Type="date" />
           <Property Name="url" Type="nchar" MaxLength="10" />
@@ -47,6 +47,7 @@
           <Property Name="gender" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="50" />
           <Property Name="about" Type="nvarchar" MaxLength="500" />
+          <Property Name="profilePic" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="UserActivity">
           <Key>
@@ -69,33 +70,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SocialNetworkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="url" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="country" Type="Int32" />
-          <Property Name="occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mobile" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="joinDate" Type="DateTime" Precision="3" />
-          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="about" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="SocialNetworkEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="LoginDetails" EntityType="SocialNetworkModel.LoginDetail" />
           <EntitySet Name="UserActivities" EntityType="SocialNetworkModel.UserActivity" />
           <EntitySet Name="Posts" EntityType="SocialNetworkModel.Post" />
+          <EntitySet Name="Users" EntityType="SocialNetworkModel.User" />
         </EntityContainer>
         <EntityType Name="LoginDetail">
           <Key>
@@ -129,35 +108,35 @@
           <Property Name="longitude" Type="Double" />
           <Property Name="attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="url" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="country" Type="Int32" />
+          <Property Name="occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="joinDate" Type="DateTime" Precision="3" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="about" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SocialNetworkModelStoreContainer" CdmEntityContainer="SocialNetworkEntities">
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="SocialNetworkModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="about" ColumnName="about" />
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="joinDate" ColumnName="joinDate" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="occupation" ColumnName="occupation" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="password" ColumnName="password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoginDetails">
             <EntityTypeMapping TypeName="SocialNetworkModel.LoginDetail">
               <MappingFragment StoreEntitySet="LoginDetails">
@@ -189,6 +168,30 @@
                 <ScalarProperty Name="statusTime" ColumnName="statusTime" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SocialNetworkModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="profilePic" ColumnName="profilePic" />
+                <ScalarProperty Name="about" ColumnName="about" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="joinDate" ColumnName="joinDate" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="occupation" ColumnName="occupation" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

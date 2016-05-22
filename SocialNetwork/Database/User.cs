@@ -20,7 +20,7 @@ namespace SocialNetwork.Database
         public string email { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public Nullable<decimal> phone { get; set; }
+        public string phone { get; set; }
         public string address { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
         public string url { get; set; }
@@ -31,5 +31,6 @@ namespace SocialNetwork.Database
         public string gender { get; set; }
         public string website { get; set; }
         public string about { get; set; }
+        public string profilePic { get; set; }
     }
 }

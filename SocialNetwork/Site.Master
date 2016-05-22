@@ -129,7 +129,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active">
                                 <a href="Profile.aspx"><%=currentUser.name %>
-                                    <img src="img/Friends/woman-4.jpg" class="img-nav">
+                                    <img src="<%=currentUser.profilePic %>" class="img-nav">
                                 </a>
                             </li>
                             <li><a href="Home.aspx"><i class="fa fa-bars"></i>&nbsp;Home</a></li>

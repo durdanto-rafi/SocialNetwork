@@ -100,13 +100,17 @@
     <div class="container" style="margin-top: 66px;">
         <div class="row row-broken">
             <div class="col-md-10 cover">
-                <img src="img/Cover/nature.jpg" class="cover-img" alt="image">
+                <img src="img/Cover/nature.jpg" id="imgCover" class="cover-img" alt="image">
                 <div class="cover-inside cover-blackout text-c text-light">
-                    <img class="cover-avatar size-md img-round" src="img/Friends/woman-4.jpg" alt="profile">
-                    <div class="field name font-weight-700"><span class="s-text">Katya Angintiew</span></div>
+                    <img class="cover-avatar size-md img-round" id="imgPropic" runat="server" src="" alt="profile">
+                    <div class="field name font-weight-700">
+                        <%--  <span class="s-text"></span>--%>
+                        <asp:Label ID="lblFullUserName" runat="server" Class="s-text"></asp:Label>
+                    </div>
                     <br>
                     <div class="field place">
-                        <span class="s-text">Riviera State 32/106</span>
+                        <%--<span class="s-text"><%= currentUser.address %></span>--%>
+                        <asp:Label ID="lblAddress" runat="server" Class="s-text"></asp:Label>
                     </div>
                     <div class="help-block-1 text-c hidden-xs">
                         <div class="user-icon f-l">
@@ -177,7 +181,7 @@
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
-                                                    <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
+                                                    <img class="img-circle" src="<%= timeline.profilePic %>" alt="User Image">
                                                     <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
                                                     <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %>  @ <%=timeline.statusPlace %></span>
                                                 </div>
@@ -200,7 +204,7 @@
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
                                                 <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
+                                                    <img class="img-circle img-sm" src=" <%= comment.userImage %>" alt="User Image">
                                                     <div class="comment-text">
                                                         <span class="username"><%= comment.name.ToString() %>
                                                             <span class="text-muted pull-right"><%= comment.time.ToString() %></span>
@@ -212,7 +216,7 @@
                                             </div>
                                             <div class="box-footer">
                                                 <div>
-                                                    <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                    <img class="img-responsive img-circle img-sm" src="<%= currentUser.profilePic %>" alt="Alt Text">
                                                     <div class="img-push">
                                                         <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
                                                         <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
@@ -235,25 +239,26 @@
                     <!-- right -->
                     <div class="col-md-6">
                         <div class="row">
+                            <!-- post -->
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                 <ContentTemplate>
                                     <% foreach (Timeline timeline in timelineRight)
                                         {%>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 ">
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
-                                                    <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
+                                                    <img class="img-circle" src="<%= timeline.profilePic %>" alt="User Image">
                                                     <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
-                                                    <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %></span>
+                                                    <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %>  @ <%=timeline.statusPlace %></span>
                                                 </div>
-                                                <div class="box-tools">
+                                                <%-- <div class="box-tools">
                                                     <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
                                                         <i class="fa fa-circle-o"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                             <div class="box-body" style="display: block;">
                                                 <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
@@ -266,7 +271,7 @@
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
                                                 <div class="box-comment">
-                                                    <img class="img-circle img-sm" src="img/Friends/woman-2.jpg" alt="User Image">
+                                                    <img class="img-circle img-sm" src=" <%= comment.userImage %>" alt="User Image">
                                                     <div class="comment-text">
                                                         <span class="username"><%= comment.name.ToString() %>
                                                             <span class="text-muted pull-right"><%= comment.time.ToString() %></span>
@@ -278,7 +283,7 @@
                                             </div>
                                             <div class="box-footer">
                                                 <div>
-                                                    <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                    <img class="img-responsive img-circle img-sm" src="<%= currentUser.profilePic %>" alt="Alt Text">
                                                     <div class="img-push">
                                                         <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
                                                         <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
@@ -293,6 +298,7 @@
                                     <asp:AsyncPostBackTrigger EventName="Click" ControlID="btnPost" />
                                 </Triggers>
                             </asp:UpdatePanel>
+                            <!-- end post-->
                         </div>
                     </div>
                     <!-- end right -->
@@ -407,7 +413,7 @@
                             </div>
                         </div>--%>
                     </div>
-                     <asp:FileUpload ID="upload" runat="server" />
+                    <asp:FileUpload ID="upload" runat="server" />
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger EventName="Click" ControlID="lnkOpenMap" />
@@ -423,7 +429,7 @@
             <input type="hidden" id="hdnh" runat="server" />
             <asp:Button ID="btncrop" runat="server" OnClick="btncrop_Click" Visible="false" Text="Crop Images" />
             <img id="imgcropped" runat="server" visible="false" />
-           
+
             <%-- <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />--%>
             <input type="hidden" id="imageName" runat="server" />
         </div>

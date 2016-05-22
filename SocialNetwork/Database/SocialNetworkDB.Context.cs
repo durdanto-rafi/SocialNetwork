@@ -25,9 +25,9 @@ namespace SocialNetwork.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<LoginDetail> LoginDetails { get; set; }
         public virtual DbSet<UserActivity> UserActivities { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

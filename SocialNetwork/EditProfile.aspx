@@ -2,24 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <script type="text/javascript" language="javascript">
-        function TestCodeBehind() {
-            document.getElementById('<%= Label1.ClientID %>').innerHTML = '<%= CodeBehind() %>';
-            return false;
-        }
-
-
-        function TestCodeBehind2() {
-            document.getElementById('<%= Button2.ClientID %>').click();
-             //  return false;
-         }
-
-
-    </script>
-
 
     <div class="row text-center color-container">
-        <h1 class="profile-name">Katya Angintiew</h1>
+        <h1 class="profile-name"><%= currentUser.firstName+" "+currentUser.lastName %></h1>
     </div>
     <!-- Timeline content -->
     <div class="row">
@@ -30,10 +15,13 @@
                         <div class="panel">
                             <div class="user-heading round">
                                 <a href="#">
-                                    <img src="img/Friends/woman-4.jpg" alt="">
+                                    <img id="imgProPic" runat="server" src="" alt="">
+                                    
                                 </a>
-                                <h1>Katya</h1>
-                                <p>jsmith@bootdey.com</p>
+                                <h1><%= currentUser.name %></h1>
+                                <p><%= currentUser.email %></p>
+                                <asp:FileUpload ID="fileUpload" runat="server" Class="btn btn-file" />
+                                <asp:Button ID="btnUpload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnUpload_Click"/>
                             </div>
 
                             <ul class="nav nav-pills nav-stacked">
@@ -55,29 +43,32 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">First name</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text">
+                                        <%--<input class="form-control" type="text">--%>
+                                        <asp:TextBox ID="txtFirstName" runat="server" class="form-control" ></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Last name</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text">
+                                         <%--<input class="form-control" type="text">--%>
+                                        <asp:TextBox ID="txtLastName" runat="server" class="form-control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Username</label>
+                                    <label class="col-md-3 control-label">Phone</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" value="">
+                                        <asp:TextBox ID="txtPhone" runat="server" class="form-control" ></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Email</label>
+                                    <label class="col-md-3 control-label">Address</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text">
+                                        <asp:TextBox ID="txtAddress" runat="server" class="form-control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info">Guardar</button>
+                                   <%-- <button type="submit" class="btn btn-info">Guardar</button>--%>
+                                    <asp:Button ID="btnSave" Text="Update Profile Info" runat="server" OnClick="btnSave_Click" Class="btn btn-info" />
                                 </div>
                             </div>
                         </div>
@@ -112,13 +103,6 @@
         </div>
     </div>
     <!--End Timeline content -->
-    <asp:Button ID="btncrop" runat="server" OnClick="btncrop_Click" Text="Crop Images" />
-    <asp:FileUpload ID="upload" runat="server" />
-
-    <input id="Button1" type="button" value="Sample One" onclick="javascript: TestCodeBehind()" />
-    <input id="Button3" type="button" value="Sample two" onclick="javascript: TestCodeBehind2()" />
-    <asp:Button ID="Button2" runat="server" Text="" OnClick="ClickedME" />
-    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
 
 
 </asp:Content>

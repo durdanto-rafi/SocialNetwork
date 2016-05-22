@@ -50,30 +50,22 @@ namespace SocialNetwork
                     if (Request.QueryString["id"] != null)
                     {
                         int userId = Convert.ToInt32(Request.QueryString["id"]);
-                        //timelines = databaseManager.getTimeLine(userId);
                         refreshTimeline(userId);
                         dvStatus.Visible = false;
+
+                        User userOther = databaseManager.getUserInfo(userId);
+                        imgPropic.Src = userOther.profilePic;
+                        lblFullUserName.Text = userOther.firstName + " " + userOther.lastName;
+                        lblAddress.Text = userOther.address;
                     }
                     else
                     {
-                        //timelines = databaseManager.getTimeLine(currentUser.id);
                         refreshTimeline(currentUser.id);
+                        imgPropic.Src = currentUser.profilePic;
+                        lblFullUserName.Text = currentUser.firstName + " " + currentUser.lastName;
+                        lblAddress.Text = currentUser.address;
                     }
                 }
-
-                //if (Session["Modal"] != null)
-                //{
-                //    String currentModal = (String)Session["Modal"];
-                //    if (currentModal == "M")
-                //    {
-                //        dvImage.Visible = false;
-                //    }
-
-                //    else if (currentModal == "P")
-                //    {
-                //        dvImage.Visible = true;
-                //    }
-                //}
             }
 
 
@@ -211,33 +203,41 @@ namespace SocialNetwork
         {
             string input = Request.Url.AbsoluteUri;
             string output = input.Substring(input.IndexOf('=') + 1);
-            string fileName = Path.GetFileName(upload.PostedFile.FileName);
 
-            Stream stream = upload.PostedFile.InputStream;
-
-            Bitmap sourceImage = new Bitmap(stream);
-
-            int maxImageWidth = 400;
-            if (sourceImage.Width > maxImageWidth)
+            if (upload.PostedFile.FileName.Length > 0)
             {
-                int newImageHeight = (int)(sourceImage.Height * ((float)maxImageWidth / (float)sourceImage.Width));
-                Bitmap resizedImage = new Bitmap(maxImageWidth, newImageHeight);
-                Graphics gr = Graphics.FromImage(resizedImage);
-                gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                gr.DrawImage(sourceImage, 0, 0, maxImageWidth, newImageHeight);
-                // Save the resized image:
+                string fileName = Path.GetFileName(upload.PostedFile.FileName);
+                fileName = "post_" + fileName;
+                Stream stream = upload.PostedFile.InputStream;
 
-                Bitmap map = new Bitmap(resizedImage);
-                map.Save(Server.MapPath("~/Uploads/" + "/") + fileName);
+                Bitmap sourceImage = new Bitmap(stream);
+
+                int maxImageWidth = 400;
+                if (sourceImage.Width > maxImageWidth)
+                {
+                    int newImageHeight = (int)(sourceImage.Height * ((float)maxImageWidth / (float)sourceImage.Width));
+                    Bitmap resizedImage = new Bitmap(maxImageWidth, newImageHeight);
+                    Graphics gr = Graphics.FromImage(resizedImage);
+                    gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    gr.DrawImage(sourceImage, 0, 0, maxImageWidth, newImageHeight);
+                    // Save the resized image:
+
+                    Bitmap map = new Bitmap(resizedImage);
+                    map.Save(Server.MapPath("~/Uploads/" + "/") + fileName);
+                }
+                else
+                {
+                    sourceImage.Save(Server.MapPath("~/Uploads/" + "/") + fileName);
+                }
+
+                imgcrop.Src = "~/Uploads/" + fileName;
+                lblImageName.Text = "Uploads/" + fileName;
+                return fileName;
             }
             else
             {
-                sourceImage.Save(Server.MapPath("~/Uploads/" + "/") + fileName);
+                return "";
             }
-
-            imgcrop.Src = "~/Uploads/" + fileName;
-            lblImageName.Text = "Uploads/" + fileName;
-            return fileName;
         }
 
         protected void Upload(object sender, EventArgs e)
