@@ -253,10 +253,15 @@ namespace SocialNetwork.Database
             return db.UserActivities.Where(x => x.postId == postId && x.type == "C").Count();
         }
 
-        public void insertComment(Message message)
+        public void insertMessage(Message message)
         {
             db.Messages.Add(message);
             db.SaveChanges();
+        }
+
+        public List<Message> getMessage(int senderId, int recieverId)
+        {
+            return db.Messages.Where(x => x.to == senderId || x.to == recieverId).OrderBy(x => x.messageTime).ToList();
         }
     }
 }

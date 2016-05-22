@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Messages.aspx.cs" Inherits="SocialNetwork.Messages" %>
 
+<%@ Import Namespace="SocialNetwork.Database" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Timeline content -->
     <div class="row">
@@ -12,15 +13,18 @@
                             <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
                                 <div class="chat-users">
                                     <h6>Online</h6>
+                                    <% foreach (User user in users)
+                                        {%>
                                     <div class="user">
                                         <div class="avatar">
-                                            <img src="img/Friends/woman-1.jpg" alt="User name">
+                                            <img src="<%=user.profilePic %>" alt="User name">
                                             <div class="status off"></div>
                                         </div>
-                                        <div class="name">User name</div>
-                                        <div class="mood">Lorem ipsum..</div>
+                                        <div class="name"><%=user.name %></div>
+                                        <div class="mood"></div>
                                     </div>
-                                    <div class="user">
+                                    <%} %>
+                                    <%-- <div class="user">
                                         <div class="avatar">
                                             <img src="img/Friends/woman-2.jpg" alt="User name">
                                             <div class="status online"></div>
@@ -219,7 +223,7 @@
                                         </div>
                                         <div class="name">User name</div>
                                         <div class="mood">Lorem ipsum..</div>
-                                    </div>
+                                    </div>--%>
                                 </div>
                             </div>
                         </div>
@@ -227,29 +231,40 @@
                             <div class="col-inside-lg decor-default">
                                 <div class="chat-body">
                                     <h6>Mini Chat</h6>
-                                    <div class="answer left">
-                                        <div class="avatar">
-                                            <img src="img/Friends/woman-1.jpg" alt="User name">
-                                            <div class="status offline"></div>
-                                        </div>
-                                        <div class="name">Alexander Herthic</div>
-                                        <div class="text">
-                                            Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                                        </div>
-                                        <div class="time">5 min ago</div>
-                                    </div>
+
+                                    <%foreach (Message message in messages)
+                                        {
+                                            if (message.from == currentUser.id)
+                                            { %>
                                     <div class="answer right">
                                         <div class="avatar">
                                             <img src="img/Friends/woman-1.jpg" alt="User name">
                                             <div class="status offline"></div>
                                         </div>
+                                        <div class="name"><%=message.from.ToString() %></div>
+                                        <div class="text">
+                                            <%=message.messageText %>
+                                        </div>
+                                        <div class="time"><%=message.messageTime.ToString() %></div>
+                                    </div>
+                                    <%}
+                                        else { %>
+                                    <div class="answer left">
+                                        <div class="avatar">
+                                            <img src="img/Friends/woman-1.jpg" alt="User name">
+                                            <div class="status offline"></div>
+                                        </div>
                                         <div class="name">Alexander Herthic</div>
                                         <div class="text">
-                                            Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+                                            <%=message.messageText %>
                                         </div>
-                                        <div class="time">5 min ago</div>
+                                        <div class="time"><%=message.messageTime.ToString() %></div>
                                     </div>
-                                    <div class="answer left">
+                                    <%  }
+                                        }%>
+
+
+                                    <%--<div class="answer left">
                                         <div class="avatar">
                                             <img src="img/Friends/woman-2.jpg" alt="User name">
                                             <div class="status online"></div>
@@ -336,13 +351,13 @@
                                             It is a long established fact that a reader will be. Thanks Mate!
                                         </div>
                                         <div class="time">5 min ago</div>
-                                    </div>
+                                    </div>--%>
                                     <div class="answer-add">
-                                       <%-- <input placeholder="Write a message">--%>
-                                        <asp:TextBox ID="txtMessage" runat ="server" placeholder="Write a message"></asp:TextBox>
+                                        <%-- <input placeholder="Write a message">--%>
+                                        <asp:TextBox ID="txtMessage" runat="server" placeholder="Write a message"></asp:TextBox>
                                         <span class="answer-btn answer-btn-1"></span>
                                         <asp:Button ID="btnMessageSend" runat="server" OnClick="btnMessageSend_Click" class="answer-btn answer-btn-2" />
-                                       <%-- <span class="answer-btn answer-btn-2"></span>--%>
+                                        <%-- <span class="answer-btn answer-btn-2"></span>--%>
                                     </div>
                                 </div>
                             </div>
@@ -351,6 +366,7 @@
                 </div>
             </div>
         </div>
+        <asp:HiddenField ID="hiddenSenderId" runat="server" Value="" />
     </div>
     <!-- End Timeline content -->
     <script type="text/javascript">

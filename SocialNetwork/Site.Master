@@ -180,7 +180,7 @@
                     <p class="text-center chat-title">Online users</p>
                     <% foreach (User user in users)
                         {%>
-                    <a href="Messages.aspx" class="list-group-item">
+                    <a href="Messages.aspx?id=<%=user.id %>" class="list-group-item">
                         <i class="fa fa-check-circle connected-status"></i>
                         <img src="<%=user.profilePic %>" class="img-chat img-thumbnail">
                         <span class="chat-user-name"><%=user.name %></span>
