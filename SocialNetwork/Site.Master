@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SocialNetwork.SiteMaster" %>
 
+<%@ Import Namespace="SocialNetwork.Database" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -29,7 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/css/jquery.Jcrop.css" rel="stylesheet" />
 
-    
+
     <script src="assets/js/jquery.1.11.1.min.js"></script>
     <script src="assets/js/custom.js"></script>
 
@@ -57,14 +58,14 @@
             $('#hdnh').val(c.h);
         };
     </script>
-   
+
 
     <!--BEGIN SELECTED MENU ITEM -->
     <script type="text/javascript">
         $(document).ready(function () {
             var url = window.location.pathname;
             var substr = url.split('/');
-            var urlaspx = substr[substr.length-1];
+            var urlaspx = substr[substr.length - 1];
             $('.navbar-nav').find('.active').removeClass('active');
             $('.nav li a').each(function () {
                 if (this.href.indexOf(urlaspx) >= 0) {
@@ -76,7 +77,7 @@
 
 
     <script type="text/javascript">
-        function successalert(Title,Text) {
+        function successalert(Title, Text) {
             swal({
                 title: Title,
                 text: Text,
@@ -177,12 +178,16 @@
                 <div class="list-group text-left">
                     <p class="text-center visible-xs"><a href="#" class="hide-chat btn btn-success">Hide</a></p>
                     <p class="text-center chat-title">Online users</p>
-                    <a href="messages.html" class="list-group-item">
+                    <% foreach (User user in users)
+                        {%>
+                    <a href="Messages.aspx" class="list-group-item">
                         <i class="fa fa-check-circle connected-status"></i>
-                        <img src="img/Friends/guy-2.jpg" class="img-chat img-thumbnail">
-                        <span class="chat-user-name">Jeferh Smith</span>
+                        <img src="<%=user.profilePic %>" class="img-chat img-thumbnail">
+                        <span class="chat-user-name"><%=user.name %></span>
                     </a>
-                    <a href="messages.html" class="list-group-item">
+                    <%} %>
+
+                    <%--                    <a href="messages.html" class="list-group-item">
                         <i class="fa fa-times-circle absent-status"></i>
                         <img src="img/Friends/woman-1.jpg" class="img-chat img-thumbnail">
                         <span class="chat-user-name">Dapibus acatar</span>
@@ -236,7 +241,7 @@
                         <i class="fa fa-check-circle connected-status"></i>
                         <img src="img/Friends/child-1.jpg" class="img-chat img-thumbnail">
                         <span class="chat-user-name">Dora ty bluekl</span>
-                    </a>
+                    </a>--%>
                 </div>
             </div>
             <!-- Online users sidebar content-->

@@ -12,13 +12,16 @@ namespace SocialNetwork
     {
         public User currentUser;
         DatabaseManager databaseManager = new DatabaseManager();
-        List<User> users = new List<User>();
+        public List<User> users = new List<User>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
             }
+
+            listUsers();
+            
         }
 
         private void listUsers()
