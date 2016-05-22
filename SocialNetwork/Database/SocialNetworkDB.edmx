@@ -22,6 +22,8 @@
           <Property Name="status" Type="nvarchar" MaxLength="500" />
           <Property Name="statusTime" Type="datetime" />
           <Property Name="statusPlace" Type="nvarchar" MaxLength="100" />
+          <Property Name="latilude" Type="float" />
+          <Property Name="longitude" Type="float" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -91,8 +93,8 @@
         <EntityContainer Name="SocialNetworkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="LoginDetails" EntityType="SocialNetworkModel.LoginDetail" />
-          <EntitySet Name="Posts" EntityType="SocialNetworkModel.Post" />
           <EntitySet Name="UserActivities" EntityType="SocialNetworkModel.UserActivity" />
+          <EntitySet Name="Posts" EntityType="SocialNetworkModel.Post" />
         </EntityContainer>
         <EntityType Name="LoginDetail">
           <Key>
@@ -101,16 +103,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
           <Property Name="loginTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Post">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="statusTime" Type="DateTime" Precision="3" />
-          <Property Name="statusPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserActivity">
           <Key>
@@ -122,6 +114,18 @@
           <Property Name="time" Type="DateTime" Precision="3" />
           <Property Name="postId" Type="Int32" />
           <Property Name="userId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="statusTime" Type="DateTime" Precision="3" />
+          <Property Name="statusPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="latilude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -161,17 +165,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="SocialNetworkModel.Post">
-              <MappingFragment StoreEntitySet="Post">
-                <ScalarProperty Name="statusPlace" ColumnName="statusPlace" />
-                <ScalarProperty Name="statusTime" ColumnName="statusTime" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserActivities">
             <EntityTypeMapping TypeName="SocialNetworkModel.UserActivity">
               <MappingFragment StoreEntitySet="UserActivity">
@@ -181,6 +174,19 @@
                 <ScalarProperty Name="details" ColumnName="details" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="SocialNetworkModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latilude" ColumnName="latilude" />
+                <ScalarProperty Name="statusPlace" ColumnName="statusPlace" />
+                <ScalarProperty Name="statusTime" ColumnName="statusTime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

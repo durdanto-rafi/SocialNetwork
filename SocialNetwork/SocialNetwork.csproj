@@ -148,6 +148,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="cropimages\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -225,10 +226,6 @@
     <Content Include="sweet-alert\sweetalert-dev.js" />
     <Content Include="sweet-alert\sweetalert.css" />
     <Content Include="sweet-alert\sweetalert.min.js" />
-    <Content Include="Uploads\1657d5ea8fcded4ae5d1da4e6801673c.jpg" />
-    <Content Include="Uploads\craze_2593.jpg" />
-    <Content Include="Uploads\IMG_20160518_134515.jpg" />
-    <Content Include="Uploads\WIN_20160520_154028.JPG" />
     <Content Include="ViewPhoto.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -317,7 +314,6 @@
     <Compile Include="Database\LoginDetail.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Mail.cs" />
     <Compile Include="Handlers\AjaxHandler.ashx.cs">
       <DependentUpon>AjaxHandler.ashx</DependentUpon>
     </Compile>

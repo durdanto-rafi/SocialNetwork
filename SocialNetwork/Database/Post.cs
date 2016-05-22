@@ -19,5 +19,7 @@ namespace SocialNetwork.Database
         public string status { get; set; }
         public Nullable<System.DateTime> statusTime { get; set; }
         public string statusPlace { get; set; }
+        public Nullable<double> latilude { get; set; }
+        public Nullable<double> longitude { get; set; }
     }
 }

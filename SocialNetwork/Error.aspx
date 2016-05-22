@@ -43,9 +43,9 @@
         <h1>500</h1>
         <div class="error-divider">
             <h2>ooops!!</h2>
-            <p class="description">SOMETHING WENT WRONG.</p>
+            <p class="description">SESSION TIME OUT</p>
         </div>
-        <a href="profile.html" class="return-btn"><i class="fa fa-home"></i>Home</a>
+        <a href="Login.aspx" class="return-btn"><i class="fa fa-home"></i>Home</a>
     </section>
 </div>
 </body>

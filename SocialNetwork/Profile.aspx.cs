@@ -11,6 +11,16 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using Image = System.Drawing.Image;
 
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 namespace SocialNetwork
 {
     public partial class Profile : System.Web.UI.Page
@@ -20,9 +30,18 @@ namespace SocialNetwork
         public List<Timeline> timelines;
         public List<Timeline> timelineLeft = new List<Timeline>();
         public List<Timeline> timelineRight = new List<Timeline>();
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             upload.Attributes["onchange"] = "UploadFile(this)";
+
+            if (Session["UserInfo"] != null)
+            {
+                currentUser = (User)Session["UserInfo"];
+            }
+
             if (!IsPostBack)
             {
                 if (Session["UserInfo"] != null)
@@ -41,45 +60,77 @@ namespace SocialNetwork
                         refreshTimeline(currentUser.id);
                     }
                 }
+
+                if (Session["Modal"] != null)
+                {
+                    String currentModal = (String)Session["Modal"];
+                    if (currentModal == "M")
+                    {
+                        dvImage.Visible = false;
+                    }
+
+                    else if (currentModal == "P")
+                    {
+                        dvImage.Visible = true;
+                    }
+                }
             }
+
+
+
         }
 
         protected void btnPost_Click(object sender, EventArgs e)
         {
-            if (Session["UserInfo"] != null)
+            if (txtStatus.Text.Trim().Length == 0)
             {
-                currentUser = (User)Session["UserInfo"];
-
-                if (txtStatus.Text.Trim().Length < 1)
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please enter your status');", true);
+                refreshTimeline(currentUser.id);
+            }
+            else
+            {
+                if (Session["UserInfo"] != null)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please enter your status');", true);
+                    dvImage.Visible = false;
+                    currentUser = (User)Session["UserInfo"];
 
-                }
-                else
-                {
                     Post post = new Post();
                     post.userId = currentUser.id;
                     post.status = txtStatus.Text.Trim();
                     post.statusTime = DateTime.Now;
-                    post.statusPlace = "Dhaka";
+
+                    DataTable dtMapInfo = new DataTable();
+                    if (Session["MapInfo"] != null)
+                    {
+                        dtMapInfo = (DataTable)Session["MapInfo"];
+                        post.statusPlace = dtMapInfo.Rows[0][1].ToString();
+                        post.latilude = Convert.ToDouble(dtMapInfo.Rows[0][2].ToString());
+                        post.longitude = Convert.ToDouble(dtMapInfo.Rows[0][3].ToString());
+                    }
 
                     databaseManager.insertPost(post);
-                    //timelines = databaseManager.getTimeLine(currentUser.id);
                     refreshTimeline(currentUser.id);
+
+                    txtStatus.Text = String.Empty;
+                    lblLocation.Text = String.Empty;
+                }
+
+                else
+                {
+                    Response.Redirect("Error.aspx");
                 }
             }
 
-            else
-            {
-                Response.Redirect("Error.aspx");
-            }
 
 
         }
 
         protected void lnkOpenMap_Click(object sender, EventArgs e)
         {
-
+            //dvImage.Visible = false;
+            Session["Modal"] = "M";
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            dvImage.Visible = false;
         }
 
         protected void lnkPhotoUpload_Click(object sender, EventArgs e)
@@ -182,5 +233,55 @@ namespace SocialNetwork
             imageName.Value = image();
         }
 
+        protected void FindCoordinates(object sender, EventArgs e)
+        {
+            try
+            {
+                string url = "http://maps.google.com/maps/api/geocode/xml?address=" + txtLocation.Text + "&sensor=false";
+                WebRequest request = WebRequest.Create(url);
+                using (WebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                    {
+                        DataSet dsResult = new DataSet();
+                        dsResult.ReadXml(reader);
+                        DataTable dtCoordinates = new DataTable();
+                        dtCoordinates.Columns.AddRange(new DataColumn[4] { new DataColumn("Id", typeof(int)),
+                    new DataColumn("Address", typeof(string)),
+                    new DataColumn("Latitude",typeof(string)),
+                    new DataColumn("Longitude",typeof(string)) });
+                        foreach (DataRow row in dsResult.Tables["result"].Rows)
+                        {
+                            string geometry_id = dsResult.Tables["geometry"].Select("result_id = " + row["result_id"].ToString())[0]["geometry_id"].ToString();
+                            DataRow location = dsResult.Tables["location"].Select("geometry_id = " + geometry_id)[0];
+                            dtCoordinates.Rows.Add(row["result_id"], row["formatted_address"], location["lat"], location["lng"]);
+                        }
+                        if (dtCoordinates.Rows.Count > 0)
+                        {
+                            pnlScripts.Visible = true;
+                            rptMarkers.DataSource = dtCoordinates;
+                            rptMarkers.DataBind();
+                            Session["MapInfo"] = dtCoordinates;
+
+                            lblLocation.Text = "  @  " + dtCoordinates.Rows[0][1].ToString();
+                        }
+
+                        refreshTimeline(currentUser.id);
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                    }
+                }
+            }
+
+            catch(Exception Ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Something went wrong, Please try again !');", true);
+            }
+            
+        }
+
+        protected void btnModalClose_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Profile.aspx");
+        }
     }
 }
