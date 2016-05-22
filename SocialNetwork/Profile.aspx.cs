@@ -61,19 +61,19 @@ namespace SocialNetwork
                     }
                 }
 
-                if (Session["Modal"] != null)
-                {
-                    String currentModal = (String)Session["Modal"];
-                    if (currentModal == "M")
-                    {
-                        dvImage.Visible = false;
-                    }
+                //if (Session["Modal"] != null)
+                //{
+                //    String currentModal = (String)Session["Modal"];
+                //    if (currentModal == "M")
+                //    {
+                //        dvImage.Visible = false;
+                //    }
 
-                    else if (currentModal == "P")
-                    {
-                        dvImage.Visible = true;
-                    }
-                }
+                //    else if (currentModal == "P")
+                //    {
+                //        dvImage.Visible = true;
+                //    }
+                //}
             }
 
 
@@ -91,7 +91,7 @@ namespace SocialNetwork
             {
                 if (Session["UserInfo"] != null)
                 {
-                    dvImage.Visible = false;
+                    //dvImage.Visible = false;
                     currentUser = (User)Session["UserInfo"];
 
                     Post post = new Post();
@@ -108,11 +108,17 @@ namespace SocialNetwork
                         post.longitude = Convert.ToDouble(dtMapInfo.Rows[0][3].ToString());
                     }
 
+                    if (lblImageName.Text.Length > 0)
+                    {
+                        post.attachment = lblImageName.Text;
+                    }
+
                     databaseManager.insertPost(post);
                     refreshTimeline(currentUser.id);
 
                     txtStatus.Text = String.Empty;
                     lblLocation.Text = String.Empty;
+                    lblImageName.Text = String.Empty;
                 }
 
                 else
@@ -128,14 +134,19 @@ namespace SocialNetwork
         protected void lnkOpenMap_Click(object sender, EventArgs e)
         {
             //dvImage.Visible = false;
-            Session["Modal"] = "M";
+            // Session["Modal"] = "M";
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
-            dvImage.Visible = false;
+            pnlMap.Visible = true;
+            pnlImage.Visible = false;
+            lblModalTitle.Text = "Select Location";
         }
 
         protected void lnkPhotoUpload_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            pnlMap.Visible = false;
+            pnlImage.Visible = true;
+            lblModalTitle.Text = "Select Image";
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
@@ -204,7 +215,7 @@ namespace SocialNetwork
 
             Bitmap sourceImage = new Bitmap(stream);
 
-            int maxImageWidth = 800;
+            int maxImageWidth = 400;
             if (sourceImage.Width > maxImageWidth)
             {
                 int newImageHeight = (int)(sourceImage.Height * ((float)maxImageWidth / (float)sourceImage.Width));
@@ -223,7 +234,7 @@ namespace SocialNetwork
             }
 
             imgcrop.Src = "~/Uploads/" + fileName;
-
+            lblImageName.Text = "Uploads/" + fileName;
             return fileName;
         }
 
@@ -231,52 +242,50 @@ namespace SocialNetwork
         {
             // upload.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(upload.FileName)));
             imageName.Value = image();
+            //lblImageName.Text = "Uploaded Image - " + imageName.Value;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
         }
 
         protected void FindCoordinates(object sender, EventArgs e)
         {
-            try
+
+            string url = "http://maps.google.com/maps/api/geocode/xml?address=" + txtLocation.Text + "&sensor=false";
+            WebRequest request = WebRequest.Create(url);
+            using (WebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                string url = "http://maps.google.com/maps/api/geocode/xml?address=" + txtLocation.Text + "&sensor=false";
-                WebRequest request = WebRequest.Create(url);
-                using (WebResponse response = (HttpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                    {
-                        DataSet dsResult = new DataSet();
-                        dsResult.ReadXml(reader);
-                        DataTable dtCoordinates = new DataTable();
-                        dtCoordinates.Columns.AddRange(new DataColumn[4] { new DataColumn("Id", typeof(int)),
+                    DataSet dsResult = new DataSet();
+                    dsResult.ReadXml(reader);
+                    DataTable dtCoordinates = new DataTable();
+                    dtCoordinates.Columns.AddRange(new DataColumn[4] { new DataColumn("Id", typeof(int)),
                     new DataColumn("Address", typeof(string)),
                     new DataColumn("Latitude",typeof(string)),
                     new DataColumn("Longitude",typeof(string)) });
-                        foreach (DataRow row in dsResult.Tables["result"].Rows)
-                        {
-                            string geometry_id = dsResult.Tables["geometry"].Select("result_id = " + row["result_id"].ToString())[0]["geometry_id"].ToString();
-                            DataRow location = dsResult.Tables["location"].Select("geometry_id = " + geometry_id)[0];
-                            dtCoordinates.Rows.Add(row["result_id"], row["formatted_address"], location["lat"], location["lng"]);
-                        }
-                        if (dtCoordinates.Rows.Count > 0)
-                        {
-                            pnlScripts.Visible = true;
-                            rptMarkers.DataSource = dtCoordinates;
-                            rptMarkers.DataBind();
-                            Session["MapInfo"] = dtCoordinates;
-
-                            lblLocation.Text = "  @  " + dtCoordinates.Rows[0][1].ToString();
-                        }
-
-                        refreshTimeline(currentUser.id);
-                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                    foreach (DataRow row in dsResult.Tables["result"].Rows)
+                    {
+                        string geometry_id = dsResult.Tables["geometry"].Select("result_id = " + row["result_id"].ToString())[0]["geometry_id"].ToString();
+                        DataRow location = dsResult.Tables["location"].Select("geometry_id = " + geometry_id)[0];
+                        dtCoordinates.Rows.Add(row["result_id"], row["formatted_address"], location["lat"], location["lng"]);
                     }
+                    if (dtCoordinates.Rows.Count > 0)
+                    {
+                        pnlScripts.Visible = true;
+                        rptMarkers.DataSource = dtCoordinates;
+                        rptMarkers.DataBind();
+                        Session["MapInfo"] = dtCoordinates;
+
+                        lblLocation.Text = "  @  " + dtCoordinates.Rows[0][1].ToString();
+                    }
+
+                    refreshTimeline(currentUser.id);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 }
             }
 
-            catch(Exception Ex)
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Something went wrong, Please try again !');", true);
-            }
-            
+
+
+
         }
 
         protected void btnModalClose_Click(object sender, EventArgs e)

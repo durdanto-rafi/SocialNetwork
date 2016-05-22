@@ -198,7 +198,7 @@
                                                 <div class="user-block">
                                                     <img class="img-circle" src="img/Friends/woman-4.jpg" alt="User Image">
                                                     <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
-                                                    <span class="description">Shared publicly - <%=timeline.statusTime.ToString() %> - <%=timeline.statusPlace.ToString() %></span>
+                                                    <span class="description">Shared publicly - <%=timeline.statusTime.ToString() %> - <%=timeline.statusPlace %></span>
                                                 </div>
                                                 <div class="box-tools">
                                                     <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">

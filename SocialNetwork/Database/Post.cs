@@ -21,5 +21,6 @@ namespace SocialNetwork.Database
         public string statusPlace { get; set; }
         public Nullable<double> latilude { get; set; }
         public Nullable<double> longitude { get; set; }
+        public string attachment { get; set; }
     }
 }
