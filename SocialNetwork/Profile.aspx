@@ -255,12 +255,9 @@
                                                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="box-body">
-                                                <p>
-                                                    <%= timeline.status.ToString() %>
-                                                </p>
-
-
+                                            <div class="box-body" style="display: block;">
+                                                <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                                <p><%= timeline.status.ToString() %> </p>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
                                                 <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
@@ -323,7 +320,11 @@
                         <div class="modal-body">
                             <asp:Panel ID="pnlImage" runat="server" Visible="false">
                                 <div class="row">
-                                    <div class="animated fadeInUp ">
+                                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
+                                    <div class="box-body" style="display: block;">
+                                        <img id="imgcrop" runat="server" class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                    </div>
+                                    <%--<div class="animated fadeInUp ">
                                         <div class="col-sm-10">
                                             <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
                                             <div class="span7 text-center">
@@ -331,7 +332,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div>--%>
                                 </div>
                             </asp:Panel>
                             <asp:Panel ID="pnlMap" runat="server" Visible="false">
@@ -406,6 +407,7 @@
                             </div>
                         </div>--%>
                     </div>
+                     <asp:FileUpload ID="upload" runat="server" />
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger EventName="Click" ControlID="lnkOpenMap" />
@@ -421,7 +423,7 @@
             <input type="hidden" id="hdnh" runat="server" />
             <asp:Button ID="btncrop" runat="server" OnClick="btncrop_Click" Visible="false" Text="Crop Images" />
             <img id="imgcropped" runat="server" visible="false" />
-            <asp:FileUpload ID="upload" runat="server" />
+           
             <%-- <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />--%>
             <input type="hidden" id="imageName" runat="server" />
         </div>

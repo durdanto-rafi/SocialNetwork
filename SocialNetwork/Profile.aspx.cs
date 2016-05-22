@@ -138,6 +138,7 @@ namespace SocialNetwork
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             pnlMap.Visible = true;
             pnlImage.Visible = false;
+            upload.Visible = false;
             lblModalTitle.Text = "Select Location";
         }
 
@@ -146,6 +147,7 @@ namespace SocialNetwork
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             pnlMap.Visible = false;
             pnlImage.Visible = true;
+            upload.Visible = true;
             lblModalTitle.Text = "Select Image";
         }
 
@@ -240,9 +242,8 @@ namespace SocialNetwork
 
         protected void Upload(object sender, EventArgs e)
         {
-            // upload.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(upload.FileName)));
             imageName.Value = image();
-            //lblImageName.Text = "Uploaded Image - " + imageName.Value;
+            refreshTimeline(currentUser.id);
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
         }
 

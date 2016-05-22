@@ -193,6 +193,15 @@ namespace SocialNetwork {
         protected global::System.Web.UI.WebControls.Repeater rptMarkers;
         
         /// <summary>
+        /// upload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload upload;
+        
+        /// <summary>
         /// hdnx control.
         /// </summary>
         /// <remarks>
@@ -245,15 +254,6 @@ namespace SocialNetwork {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage imgcropped;
-        
-        /// <summary>
-        /// upload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload upload;
         
         /// <summary>
         /// imageName control.
