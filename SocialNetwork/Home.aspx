@@ -215,7 +215,7 @@
 
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %></span>
+                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
                                             </div>
                                             <div class="box-footer box-comments">
                                                 <% foreach (Comment comment in timeline.comments)
@@ -232,7 +232,7 @@
                                                 <%} %>
                                             </div>
                                             <div class="box-footer">
-                                                <img class="img-responsive img-circle img-sm" src="img/Friends/woman-4.jpg" alt="Alt Text">
+                                                <img class="img-responsive img-circle img-sm" src="<%=currentUser.profilePic %>" alt="Alt Text">
                                                 <div class="img-push">
                                                     <%--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--%>
                                                     <div class="row">
