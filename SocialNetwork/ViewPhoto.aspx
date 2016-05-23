@@ -8,22 +8,22 @@
                 <div class="col-md-10 animated fadeInLeft">
                     <hr>
                     <div class="col-sm-8">
-                        <img src="img/Photos/4.jpg" class="img-responsive" alt="">
+                        <img src="<%=viewAttachment.attachmentPath %>" class="img-responsive" alt="">
                     </div>
                     <div class="col-sm-4">
-                        <h2>Katya Angintiew</h2>
+                        <h2><%=viewAttachment.userFullName %></h2>
                         <div class="box">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            <%=viewAttachment.status %>
                         </div>
                         <div class="box">
                             <ul class="list-unstyled">
-                                <li><i class="fa fa-calendar"></i>26/02/2014</li>
-                                <li><i class="fa fa-eye"></i>125 Views</li>
-                                <li><i class="fa fa-comment"></i>4 Comments</li>
+                                <li><i class="fa fa-calendar"></i><%=viewAttachment.statusTime.Value.Date.ToShortDateString() %></li>
+                                <li><i class="fa fa-eye"></i><%=viewAttachment.likeCount %> Likes</li>
+                                <li><i class="fa fa-comment"></i><%=viewAttachment.commentCount %> Comments</li>
                             </ul>
                         </div>
-                        <a href="#" class="btn btn-info show-image">Like</a>
-                        <a href="#comments" class="btn btn-info scroll">Share</a>
+                      <%--  <a href="#" class="btn btn-info show-image">Like</a>
+                        <a href="#comments" class="btn btn-info scroll">Share</a>--%>
                     </div>
                 </div>
             </div>

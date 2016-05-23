@@ -278,6 +278,7 @@
     <Compile Include="Database\UserActivity.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\ViewAttachment.cs" />
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

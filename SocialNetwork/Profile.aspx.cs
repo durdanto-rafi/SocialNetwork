@@ -38,11 +38,7 @@ namespace SocialNetwork
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
-            }
-
-            if (!IsPostBack)
-            {
-                if (Session["UserInfo"] != null)
+                if (!IsPostBack)
                 {
                     currentUser = (User)Session["UserInfo"];
                     if (Request.QueryString["id"] != null)
@@ -63,8 +59,15 @@ namespace SocialNetwork
                         lblFullUserName.Text = currentUser.firstName + " " + currentUser.lastName;
                         lblAddress.Text = currentUser.address;
                     }
+
                 }
             }
+            else
+            {
+                Response.Redirect("Error.aspx");
+            }
+
+
 
 
 

@@ -89,7 +89,7 @@ namespace SocialNetwork.Database
         public List<Timeline> getTimeLine(int userId)
         {
             var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y }).Where(x => x.x.userId == userId)
-                .Select(x => new { x.x.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status, x.x.attachment, x.y.profilePic, x.y.address, x.y.firstName, x.y.lastName })
+                .Select(x => new { x.x.id,  x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status, x.x.attachment, x.y.profilePic, x.y.address, x.y.firstName, x.y.lastName })
                 .OrderByDescending(x => x.statusTime).ToList(); ;
 
             List<Timeline> timelines = new List<Timeline>();
@@ -107,6 +107,7 @@ namespace SocialNetwork.Database
                 timeline.profilePic = item.profilePic;
                 timeline.address = item.address;
                 timeline.fullName = item.firstName + " " + item.lastName;
+               
 
 
                 var comments = db.UserActivities.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y }).Where(x => x.x.postId == item.id && x.x.type == "C")
@@ -173,7 +174,7 @@ namespace SocialNetwork.Database
 
 
             var data = db.Posts.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y })
-               .Select(x => new { x.x.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status, x.x.attachment, x.y.profilePic, x.y.address, x.y.firstName, x.y.lastName })
+               .Select(x => new { x.x.id, userId = x.y.id, x.y.name, x.x.statusTime, x.x.statusPlace, x.x.status, x.x.attachment, x.y.profilePic, x.y.address, x.y.firstName, x.y.lastName })
                .OrderByDescending(x => x.statusTime).ToList(); ;
 
             List<Timeline> timelines = new List<Timeline>();
@@ -191,6 +192,7 @@ namespace SocialNetwork.Database
                 timeline.profilePic = item.profilePic;
                 timeline.address = item.address;
                 timeline.fullName = item.firstName + " " + item.lastName;
+                timeline.userId = item.userId;
 
 
                 var comments = db.UserActivities.Join(db.Users, x => x.userId, y => y.id, (x, y) => new { x, y }).Where(x => x.x.postId == item.id && x.x.type == "C")
@@ -283,6 +285,23 @@ namespace SocialNetwork.Database
             return miniChats;
 
 
+        }
+
+        public ViewAttachment getPost(int postId)
+        {
+            var data = db.Posts.Join(db.Users, x => x.userId , y => y.id, (x, y) => new { x, y }).Where(x=> (x.x.id == postId))
+               .Select(x => new { userId = x.y.id, x.y.name, x.x.statusTime,  x.x.status, x.x.attachment, x.y.profilePic, x.y.firstName, x.y.lastName })
+               .OrderByDescending(x => x.statusTime).ToList()[0]; 
+
+            ViewAttachment viewAttachment = new ViewAttachment();
+            viewAttachment.attachmentPath = data.attachment;
+            viewAttachment.status = data.status;
+            viewAttachment.statusTime = data.statusTime;
+            viewAttachment.userFullName = data.firstName + " " + data.lastName;
+            viewAttachment.likeCount = db.UserActivities.Where(x => x.postId == postId && x.type == "L").Count();
+            viewAttachment.commentCount = db.UserActivities.Where(x => x.postId == postId && x.type == "C").Count();
+
+            return viewAttachment;
         }
     }
 }

@@ -20,19 +20,19 @@ namespace SocialNetwork
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
-
                 if (!IsPostBack)
                 {
-
-
+                    if (Request.QueryString["id"] != null)
+                    {
+                        hiddenSenderId.Value = Request.QueryString["id"];
+                        messages = databaseManager.getMessage(Convert.ToInt32(hiddenSenderId.Value), currentUser.id);
+                    }
                 }
 
-                listUsers();
-                if (Request.QueryString["id"] != null)
-                {
-                    hiddenSenderId.Value = Request.QueryString["id"];
-                    messages = databaseManager.getMessage(Convert.ToInt32(hiddenSenderId.Value), currentUser.id);
-                }
+            }
+            else
+            {
+                Response.Redirect("Error.aspx");
             }
 
 
@@ -46,7 +46,6 @@ namespace SocialNetwork
                 if (txtMessage.Text.Trim().Length == 0)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please type you message !');", true);
-
                 }
                 else if ((hiddenSenderId.Value.Length == 0))
                 {
@@ -56,7 +55,7 @@ namespace SocialNetwork
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('You cant sent message to yourself !');", true);
                 }
-               
+
                 else {
 
                     currentUser = (User)Session["UserInfo"];

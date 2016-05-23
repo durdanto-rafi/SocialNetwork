@@ -15,14 +15,18 @@ namespace SocialNetwork
         public List<Timeline> timelines;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!IsPostBack)
+            if (Session["UserInfo"] != null)
             {
-                if (Session["UserInfo"] != null)
+                if (!IsPostBack)
                 {
                     currentUser = (User)Session["UserInfo"];
                     timelines = databaseManager.getHome(currentUser.id);
                 }
+            }
+
+            else
+            {
+                Response.Redirect("Error.aspx");
             }
         }
 

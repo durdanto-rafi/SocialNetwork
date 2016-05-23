@@ -16,11 +16,11 @@ namespace SocialNetwork.Database
         public int likesCount { get; set; }
         public int commentsCount { get; set; }
         public List<Comment> comments { get; set; }
-
         public string profilePic { get; set; }
 
         public string address { get; set; }
 
         public string fullName { get; set; }
+        public int userId { get; set; }
     }
 }

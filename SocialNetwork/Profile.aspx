@@ -240,7 +240,14 @@
                                                 </div>--%>
                                             </div>
                                             <div class="box-body" style="display: block;">
+                                                 <% if (timeline.attachment != null)
+                                                {%>
+                                                <a href="ViewPhoto.aspx?id=<%= timeline.postId %>">
+                                                    <img class="img-responsive pad" src="<%= timeline.attachment %>" alt=""></a>
+                                                <%}
+                                                else { %>
                                                 <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                                <%} %>
                                                 <p><%= timeline.status.ToString() %> </p>
                                                 <%--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
@@ -299,6 +306,7 @@
                                         <div class="box box-widget">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
+
                                                     <img class="img-circle" src="<%= timeline.profilePic %>" alt="User Image">
                                                     <span class="username"><a href="#"><%=timeline.name.ToString() %></a></span>
                                                     <span class="description">Shared publicly -<%=timeline.statusTime.ToString() %>  @ <%=timeline.statusPlace %></span>
@@ -312,9 +320,16 @@
                                                 </div>--%>
                                             </div>
                                             <div class="box-body" style="display: block;">
+                                                <% if (timeline.attachment != null)
+                                                {%>
+                                                <a href="ViewPhoto.aspx?id=<%= timeline.postId %>">
+                                                    <img class="img-responsive pad" src="<%= timeline.attachment %>" alt=""></a>
+                                                <%}
+                                                else { %>
                                                 <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                                <%} %>
                                                 <p><%= timeline.status.ToString() %> </p>
-                                              <%--  <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
+                                                <%--  <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
 
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
@@ -380,18 +395,16 @@
                         <div class="modal-body">
                             <asp:Panel ID="pnlImage" runat="server" Visible="false">
                                 <div class="row">
-                                     <div class="col-md-3">
-                                         <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" class="btn btn-primary btn-lg btn-block" />
-                                     </div>
-
-                                    <div class="col-md-9" >
-                                        <img id="imgcrop" runat="server" class="img-thumbnail" src="<%= (timeline.attachment==null)timeline.attachment?:'img/prism-1.png' %>" alt="">
-                                        
+                                    <div class="col-md-3">
+                                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" class="btn btn-primary btn-lg btn-block" />
                                     </div>
-                                    
-                                    
+
+                                    <div class="col-md-9">
+                                        <img id="imgcrop" runat="server" class="img-thumbnail" src="<%= (timeline.attachment==null)timeline.attachment?:'img/prism-1.png' %>" alt="">
+                                    </div>
+
+
                                     <div class="box-body" style="display: block;">
-                                        
                                     </div>
                                     <%--<div class="animated fadeInUp ">
                                         <div class="col-sm-10">

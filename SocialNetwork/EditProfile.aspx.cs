@@ -25,20 +25,20 @@ namespace SocialNetwork
             if (Session["UserInfo"] != null)
             {
                 currentUser = (User)Session["UserInfo"];
-
                 if (!IsPostBack)
                 {
-
                     txtFirstName.Text = currentUser.firstName;
                     txtLastName.Text = currentUser.lastName;
                     txtPhone.Text = currentUser.phone;
                     txtAddress.Text = currentUser.address;
                     imgProPic.Src = currentUser.profilePic;
-
                 }
             }
 
-            
+            else
+            {
+                Response.Redirect("Error.aspx");
+            }
         }
 
         public static System.Drawing.Image PadImage(System.Drawing.Image originalImage)

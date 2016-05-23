@@ -234,3 +234,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+SocialNetwork/Uploads/coder.jpg
+*.jpg
+SocialNetwork/Uploads/logo_cocoCraze.png
+*.png

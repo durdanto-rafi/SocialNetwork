@@ -45,7 +45,7 @@
             <h2>ooops!!</h2>
             <p class="description">SESSION TIME OUT</p>
         </div>
-        <a href="Login.aspx" class="return-btn"><i class="fa fa-home"></i>Home</a>
+        <a href="Login.aspx" class="return-btn"><i class="fa fa-home"></i>Login</a>
     </section>
 </div>
 </body>
