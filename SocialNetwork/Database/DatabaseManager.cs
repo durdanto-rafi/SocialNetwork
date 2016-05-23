@@ -259,9 +259,30 @@ namespace SocialNetwork.Database
             db.SaveChanges();
         }
 
-        public List<Message> getMessage(int senderId, int recieverId)
+        public List<MiniChat> getMessage(int senderId, int recieverId)
         {
-            return db.Messages.Where(x => x.to == senderId || x.to == recieverId).OrderBy(x => x.messageTime).ToList();
+            //return db.Messages.Where(x => x.to == senderId || x.to == recieverId).OrderBy(x => x.messageTime).ToList();
+
+
+            var data = db.Messages.Join(db.Users, x => x.from, y => y.id, (x, y) => new { x, y })
+                .Where(x => x.x.to == senderId || x.x.to == recieverId)
+                .Select(x => new { x.y.id, x.y.name, x.y.profilePic, x.x.messageText, x.x.messageTime })
+                .OrderBy(x => x.messageTime).ToList();
+
+            List<MiniChat> miniChats = new List<MiniChat>();
+            for (int i = 0; i < data.Count; i++)
+            {
+                MiniChat miniChat = new MiniChat();
+                miniChat.Id = data[i].id;
+                miniChat.name = data[i].name;
+                miniChat.proPicture = data[i].profilePic;
+                miniChat.messageText = data[i].messageText;
+                miniChat.messageTime = data[i].messageTime;
+                miniChats.Add(miniChat);
+            }
+            return miniChats;
+
+
         }
     }
 }

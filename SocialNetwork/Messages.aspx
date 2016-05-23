@@ -9,21 +9,11 @@
                 <div class="col-md-10 animated fadeInUp">
                     <hr>
                     <div class="row row-broken">
-                        <div class="col-sm-3 col-xs-12">
+                        <div class="col-sm-0 col-xs-0">
                             <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
                                 <div class="chat-users">
-                                    <h6>Online</h6>
-                                    <% foreach (User user in users)
-                                        {%>
-                                    <div class="user">
-                                        <div class="avatar">
-                                            <img src="<%=user.profilePic %>" alt="User name">
-                                            <div class="status off"></div>
-                                        </div>
-                                        <div class="name"><%=user.name %></div>
-                                        <div class="mood"></div>
-                                    </div>
-                                    <%} %>
+                                   
+                                   
                                     <%-- <div class="user">
                                         <div class="avatar">
                                             <img src="img/Friends/woman-2.jpg" alt="User name">
@@ -227,21 +217,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
+                        <div class="col-sm-12 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
                             <div class="col-inside-lg decor-default">
                                 <div class="chat-body">
                                     <h6>Mini Chat</h6>
-
-                                    <%foreach (Message message in messages)
+                                    <div class="threads" >
+                                    <%foreach (MiniChat message in messages)
                                         {
-                                            if (message.from == currentUser.id)
+                                            if (message.Id == currentUser.id)
                                             { %>
                                     <div class="answer right">
                                         <div class="avatar">
-                                            <img src="img/Friends/woman-1.jpg" alt="User name">
+                                            <img src="<%=message.proPicture %>" alt="User name">
                                             <div class="status offline"></div>
                                         </div>
-                                        <div class="name"><%=message.from.ToString() %></div>
+                                        <div class="name"><%=message.name.ToString() %></div>
                                         <div class="text">
                                             <%=message.messageText %>
                                         </div>
@@ -251,10 +241,10 @@
                                         else { %>
                                     <div class="answer left">
                                         <div class="avatar">
-                                            <img src="img/Friends/woman-1.jpg" alt="User name">
+                                            <img src="<%= message.proPicture %>" alt="User name">
                                             <div class="status offline"></div>
                                         </div>
-                                        <div class="name">Alexander Herthic</div>
+                                        <div class="name"><%=message.name.ToString() %></div>
                                         <div class="text">
                                             <%=message.messageText %>
                                         </div>
@@ -263,7 +253,7 @@
                                     <%  }
                                         }%>
 
-
+                                    </div>
                                     <%--<div class="answer left">
                                         <div class="avatar">
                                             <img src="img/Friends/woman-2.jpg" alt="User name">
@@ -371,7 +361,7 @@
     <!-- End Timeline content -->
     <script type="text/javascript">
         $(function () {
-            $(".chat").niceScroll();
+            $('.threads').animate({ scrollTop: $('.threads').prop("scrollHeight") }, 1000);
         });
     </script>
 </asp:Content>

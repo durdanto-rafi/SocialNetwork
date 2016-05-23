@@ -13,7 +13,7 @@ namespace SocialNetwork
         public User currentUser;
         DatabaseManager databaseManager = new DatabaseManager();
         public List<User> users = new List<User>();
-        public List<Message> messages = new List<Message>();
+        public List<MiniChat> messages = new List<MiniChat>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,13 +23,15 @@ namespace SocialNetwork
 
                 if (!IsPostBack)
                 {
-                    listUsers();
-                    if(Request.QueryString["id"] != null)
-                    {
-                        hiddenSenderId.Value = Request.QueryString["id"];
-                        messages = databaseManager.getMessage(Convert.ToInt32(hiddenSenderId.Value), currentUser.id);
-                    }
+                   
                     
+                }
+
+                listUsers();
+                if (Request.QueryString["id"] != null)
+                {
+                    hiddenSenderId.Value = Request.QueryString["id"];
+                    messages = databaseManager.getMessage(Convert.ToInt32(hiddenSenderId.Value), currentUser.id);
                 }
             }
 

@@ -172,6 +172,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="font-awesome-4.4.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Friends.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="img\Bg\bg2.jpg" />
@@ -232,6 +233,11 @@
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <Content Include="Handlers\AjaxHandler.ashx" />
+    <Content Include="font-awesome-4.4.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="font-awesome-4.4.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="font-awesome-4.4.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="font-awesome-4.4.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="font-awesome-4.4.0\fonts\FontAwesome.otf" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
     <EntityDeploy Include="Database\SocialNetworkDB.edmx">
@@ -264,6 +270,7 @@
     <Compile Include="Database\Message.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\MiniChat.cs" />
     <Compile Include="Database\Post.cs">
       <DependentUpon>SocialNetworkDB.tt</DependentUpon>
     </Compile>

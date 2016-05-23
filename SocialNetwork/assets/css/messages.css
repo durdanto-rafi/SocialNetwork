@@ -5,7 +5,7 @@
     padding: 20px;
 }
 .chat {
-    height: calc(100vh - 180px);
+    
 }
 .decor-default {
     background-color: #ffffff;
@@ -235,4 +235,12 @@
 .chat input {
     -webkit-appearance: none;
     border-radius: 0;
+}
+
+.threads {
+    margin-bottom : 20px;
+    height : auto;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height : 400px;
 }

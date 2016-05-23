@@ -163,10 +163,10 @@
                     <!-- end left content-->
                     <!-- right  content-->
                     <div class="profile-info col-md-8 animated fadeInUp">
-                        <div class="row">
+                        <div class="row" >
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" runat="server" visible="false">
                                         <div class="panel profile-info">
                                             <div>
                                                 <asp:TextBox ID="txtStatus" runat="server" class="form-control input-lg p-text-area" TextMode="MultiLine" placeholder="Whats in your mind today?"></asp:TextBox>
@@ -214,10 +214,17 @@
 
 
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                <span class="pull-right text-muted"><%= timeline.likesCount.ToString() %> likes -  <%= timeline.commentsCount.ToString() %> comments</span>
+                                                <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                            
+                                                <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
+                                                <span class="pull-right">&nbsp - &nbsp;</span>
+                                                <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
+                                          
+                                            
                                             </div>
-                                            <div class="box-footer box-comments">
+                                            
+                                            
+                                            <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
                                                 <div class="box-comment">
@@ -232,19 +239,16 @@
                                                 <%} %>
                                             </div>
                                             <div class="box-footer">
-                                                <img class="img-responsive img-circle img-sm" src="<%=currentUser.profilePic %>" alt="Alt Text">
-                                                <div class="img-push">
-                                                    <%--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--%>
-                                                    <div class="row">
-                                                        <div class="col-lg-8">
-                                                            <asp:TextBox ID="txtComment" runat="server" class="form-control input-sm" placeholder="Press enter to post comment"></asp:TextBox>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <asp:Button runat="server" ID="btnComment" CssClass="btn btn-primary" />
-                                                        </div>
+                                                <div>
+                                                    <img class="img-responsive img-circle img-sm" src="<%= currentUser.profilePic %>" alt="Alt Text">
+                                                    <div class="img-push">
+                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Enter your comment">
+                                                        <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </div>
                                     <%} %>
@@ -267,4 +271,106 @@
         </div>
     </div>
     <!-- end timeline content-->
+
+    <script>
+        $(document).on('ready', function () {
+            $(document).on('click', '.btn-like', function (e) {
+                e.preventDefault();
+                var postId = $(this).attr('data-post');
+                
+                var postdata = JSON.stringify(
+                   {
+                       "func":'L',
+                       "val1":'',
+                       "val2": postId,
+                       "val3":  <%= currentUser.id %>,
+                       "val4": ''
+                   });
+
+                loadJsonData(postdata , $(this) , postId , '' , 'L');
+            });
+
+
+            $(document).on('click', '.input-comment-button', function (e) {
+                e.preventDefault();
+                var postId = $(this).attr('data-post');
+                var comment = $(this).prev('input').val();
+                
+                if(comment.length<1)
+                {
+                    errorAlert('Comment section is empty !');
+                }
+                else
+                {
+                    var postdata = JSON.stringify(
+                   {
+                       "func": 'C',
+                       "val1": comment,
+                       "val2": postId,
+                       "val3": <%= currentUser.id %>,
+                       "val4": ''
+                   });
+
+                   loadJsonData(postdata , $(this) , postId, comment , 'C');
+
+               }
+
+                
+
+            });
+        });
+
+
+       function loadJsonData(postdata , actionElement , postId ,inputValue , type) {
+           
+           $.ajax({
+               type: "POST",
+               url: "Handlers/AjaxHandler.ashx",
+               cache: false,
+               data: postdata,
+               dataType: "json",
+               success: getSuccess,
+               error: getFail
+           });
+           
+           $postArray = postdata;
+
+           function getSuccess(data, textStatus, jqXHR) {
+               console.log(data.Response[0]);
+               console.log(data.Response[1]);
+
+               var commentCounter = $('span#commentsCount-' + postId );
+               var likesCounter = $('span#likesCount-' + postId );
+
+               //alert(data.Response);
+               if(type == 'C'){
+                   console.log(type);
+                   console.log(inputValue);
+                   var profilePic = "<%= currentUser.profilePic %>";
+                   var userName = "<%= currentUser.name %>";
+
+                   var newComment = "<div class='box-comment'><img alt='User Image' src='" + profilePic + "' class='img-circle img-sm'><div class='comment-text'><span class='username'>" + userName + "<span class='text-muted pull-right'>Just Now</span></span>" + inputValue +
+                                    "</div>";
+                   
+                   var commentContainer = $('#commentsContainer-' + postId );
+
+                   
+
+                   commentContainer.append(newComment);
+                   var input = actionElement.prev(input);
+                   input.val('');
+                   commentCounter.html(data.Response[0] + ' comments ');
+                   likesCounter.html(data.Response[1] + ' likes ');
+               }else{
+                   console.log(type);
+                   commentCounter.html(data.Response[0] + ' comments ');
+                   console.log('received '+data.Response[1]);
+                   likesCounter.html(data.Response[1] + ' likes ');
+               }
+           };
+           function getFail(jqXHR, textStatus, errorThrown) {
+               alert(jqXHR.status);
+           };
+       };
+    </script>
 </asp:Content>

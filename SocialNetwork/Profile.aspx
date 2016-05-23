@@ -122,6 +122,25 @@
                 alert("AA");
             }
         }   
+
+
+        $(document).on('change', '#MainContent_upload', function(){
+            readURL(this, $('#MainContent_imgcrop'));
+        });
+
+        function readURL(input, $imagePreviewHolder) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $imagePreviewHolder.show();
+                    $imagePreviewHolder.attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
     </script>
     <!-- Timeline container -->
     <div class="container" style="margin-top: 66px;">
@@ -185,10 +204,10 @@
                                                     <li>
                                                         <asp:LinkButton ID="lnkPhotoUpload" runat="server" OnClick="lnkPhotoUpload_Click"><i class="fa fa-camera"></i></asp:LinkButton></li>
 
-                                                    <li>
+                                                    <%--<li>
                                                         <asp:LinkButton runat="server"><i class="fa fa-film" ></i></asp:LinkButton></li>
                                                     <li>
-                                                        <asp:LinkButton runat="server"><i class="fa fa-microphone"></i></asp:LinkButton></li>
+                                                        <asp:LinkButton runat="server"><i class="fa fa-microphone"></i></asp:LinkButton></li>--%>
                                                 </ul>
                                             </div>
                                         </div>
@@ -229,7 +248,7 @@
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
                                                 <span class="pull-right">&nbsp - &nbsp;</span>
                                                 <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
-                                                
+
                                             </div>
 
                                             <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
@@ -250,7 +269,7 @@
                                                 <div>
                                                     <img class="img-responsive img-circle img-sm" src="<%= currentUser.profilePic %>" alt="Alt Text">
                                                     <div class="img-push">
-                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
+                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Enter your comment">
                                                         <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
                                                     </div>
                                                 </div>
@@ -297,11 +316,11 @@
                                                 <p><%= timeline.status.ToString() %> </p>
                                                 <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                                
+
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
                                                 <span class="pull-right">&nbsp - &nbsp;</span>
                                                 <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
-                                                </div>
+                                            </div>
                                             <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>
@@ -320,7 +339,7 @@
                                                 <div>
                                                     <img class="img-responsive img-circle img-sm" src="<%= currentUser.profilePic %>" alt="Alt Text">
                                                     <div class="img-push">
-                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Press enter to post comment">
+                                                        <input type="text" class="form-control input-sm input-comment" placeholder="Enter your comment">
                                                         <button data-post="<%= timeline.postId.ToString() %>" class="btn btn-sm input-comment-button">Send</button>
                                                     </div>
                                                 </div>
@@ -361,9 +380,18 @@
                         <div class="modal-body">
                             <asp:Panel ID="pnlImage" runat="server" Visible="false">
                                 <div class="row">
-                                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
+                                     <div class="col-md-3">
+                                         <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" class="btn btn-primary btn-lg btn-block" />
+                                     </div>
+
+                                    <div class="col-md-9" >
+                                        <img id="imgcrop" runat="server" class="img-thumbnail" src="<%= (timeline.attachment==null)timeline.attachment?:'img/prism-1.png' %>" alt="">
+                                        
+                                    </div>
+                                    
+                                    
                                     <div class="box-body" style="display: block;">
-                                        <img id="imgcrop" runat="server" class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
+                                        
                                     </div>
                                     <%--<div class="animated fadeInUp ">
                                         <div class="col-sm-10">
@@ -448,7 +476,7 @@
                             </div>
                         </div>--%>
                     </div>
-                    <asp:FileUpload ID="upload" runat="server" />
+                    <asp:FileUpload ID="upload" runat="server" class="btn btn-lg btn-success" />
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger EventName="Click" ControlID="lnkOpenMap" />

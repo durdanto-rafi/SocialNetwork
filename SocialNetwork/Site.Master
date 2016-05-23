@@ -26,8 +26,8 @@
     <link href="assets/css/animate.min.css" rel="stylesheet" />
     <link href="assets/css/timeline.css" rel="stylesheet" />
     <link href="assets/css/photos.css" rel="stylesheet" />
-    <%--<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />--%>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+    <%--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />--%>
     <link href="assets/css/jquery.Jcrop.css" rel="stylesheet" />
 
 
@@ -35,7 +35,7 @@
     <script src="assets/js/custom.js"></script>
 
     <script src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.min.js"></script>
+   
 
     <link href="sweet-alert/sweetalert.css" rel="stylesheet" />
     <script src="sweet-alert/sweetalert.min.js"></script>
@@ -246,6 +246,9 @@
             </div>
             <!-- Online users sidebar content-->
 
+        </form>
+
+        
             <!--BEGIN FOOTER-->
             <footer class="welcome-footer">
                 <div class="container">
@@ -262,7 +265,6 @@
                 </div>
             </footer>
             <!--END FOOTER-->
-        </form>
     </div>
 </body>
 </html>
