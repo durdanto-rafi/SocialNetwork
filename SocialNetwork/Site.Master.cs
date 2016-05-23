@@ -24,7 +24,15 @@ namespace SocialNetwork
         }
         private void listUsers()
         {
-            users = databaseManager.getAllUserInfo();
+            if (Session["UserInfo"] != null)
+            {
+                currentUser = (User)Session["UserInfo"];
+                users = databaseManager.getAllUserInfo();
+
+                var userToRemove = users.Single(r => r.id == currentUser.id);
+                users.Remove(userToRemove);
+            }
+            
         }
     }
 }

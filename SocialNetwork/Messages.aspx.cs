@@ -23,8 +23,8 @@ namespace SocialNetwork
 
                 if (!IsPostBack)
                 {
-                   
-                    
+
+
                 }
 
                 listUsers();
@@ -43,8 +43,22 @@ namespace SocialNetwork
         {
             if (Session["UserInfo"] != null)
             {
-                if (txtMessage.Text.Trim().Length > 0)
+                if (txtMessage.Text.Trim().Length == 0)
                 {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please type you message !');", true);
+
+                }
+                else if ((hiddenSenderId.Value.Length == 0))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('Please select someone first from the rigt side chat list !');", true);
+                }
+                else if (currentUser.id == Convert.ToInt32(hiddenSenderId.Value))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "errorAlert('You cant sent message to yourself !');", true);
+                }
+               
+                else {
+
                     currentUser = (User)Session["UserInfo"];
                     Message message = new Message();
                     message.messageText = txtMessage.Text.Trim();
@@ -53,8 +67,8 @@ namespace SocialNetwork
                     message.messageTime = DateTime.Now;
 
                     databaseManager.insertMessage(message);
-                }
-                else {
+                    txtMessage.Text = String.Empty;
+                    messages = databaseManager.getMessage(Convert.ToInt32(hiddenSenderId.Value), currentUser.id);
 
                 }
 

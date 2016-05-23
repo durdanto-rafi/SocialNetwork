@@ -163,7 +163,7 @@
                     <!-- end left content-->
                     <!-- right  content-->
                     <div class="profile-info col-md-8 animated fadeInUp">
-                        <div class="row" >
+                        <div class="row">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <div class="col-md-12" runat="server" visible="false">
@@ -213,17 +213,17 @@
                                                 <p><%=timeline.status.ToString() %></p>
 
 
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
+                                               <%-- <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                                            
+
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
                                                 <span class="pull-right">&nbsp - &nbsp;</span>
                                                 <span class="pull-right text-muted" id="likesCount-<%= timeline.postId.ToString()  %>"><%= timeline.likesCount.ToString() %> likes</span>
-                                          
-                                            
+
+
                                             </div>
-                                            
-                                            
+
+
                                             <div class="box-footer box-comments" id="commentsContainer-<%= timeline.postId.ToString()  %>">
                                                 <% foreach (Comment comment in timeline.comments)
                                                     {%>

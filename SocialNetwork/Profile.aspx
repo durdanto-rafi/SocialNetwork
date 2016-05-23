@@ -242,7 +242,7 @@
                                             <div class="box-body" style="display: block;">
                                                 <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
                                                 <p><%= timeline.status.ToString() %> </p>
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
+                                                <%--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
 
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>
@@ -314,7 +314,7 @@
                                             <div class="box-body" style="display: block;">
                                                 <img class="img-responsive pad" src="<%= timeline.attachment %>" alt="">
                                                 <p><%= timeline.status.ToString() %> </p>
-                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>
+                                              <%--  <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>Share</button>--%>
                                                 <button data-post="<%= timeline.postId.ToString() %>" type="button" class="btn btn-default btn-xs btn-like"><i class="fa fa-thumbs-o-up"></i>Like</button>
 
                                                 <span class="pull-right text-muted" id="commentsCount-<%= timeline.postId.ToString()  %>"><%= timeline.commentsCount.ToString() %> comments</span>

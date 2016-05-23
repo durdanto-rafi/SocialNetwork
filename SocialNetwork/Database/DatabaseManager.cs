@@ -265,7 +265,7 @@ namespace SocialNetwork.Database
 
 
             var data = db.Messages.Join(db.Users, x => x.from, y => y.id, (x, y) => new { x, y })
-                .Where(x => x.x.to == senderId || x.x.to == recieverId)
+                .Where(x => (x.x.from == senderId && x.x.to == recieverId) || (x.x.to == senderId && x.x.from== recieverId))
                 .Select(x => new { x.y.id, x.y.name, x.y.profilePic, x.x.messageText, x.x.messageTime })
                 .OrderBy(x => x.messageTime).ToList();
 
